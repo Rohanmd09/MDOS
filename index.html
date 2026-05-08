@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD OS — Rohan's Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   MD OS — DESIGN SYSTEM
+═══════════════════════════════════════════ */
+:root {
+  --bg:      #0A0A0D;
+  --bg2:     #111115;
+  --bg3:     #18181E;
+  --bg4:     #202028;
+  --bg5:     #28282F;
+  --bg6:     #32323C;
+  --border:  rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.11);
+  --border3: rgba(255,255,255,0.18);
+  --text:    #EEEDF4;
+  --text2:   #9896A8;
+  --text3:   #55546A;
+  --text4:   #36354A;
+  --accent:  #7B6EDF;
+  --accent2: #A49CFF;
+  --acc-glow:rgba(123,110,223,0.18);
+  --amber:   #F2A233;
+  --amber-d: #C47A10;
+  --amb-bg:  rgba(242,162,51,0.11);
+  --green:   #3ECF8E;
+  --grn-bg:  rgba(62,207,142,0.10);
+  --red:     #F16C6C;
+  --red-bg:  rgba(241,108,108,0.10);
+  --teal:    #22D3C8;
+  --teal-bg: rgba(34,211,200,0.09);
+  --blue:    #60A5FA;
+  --blue-bg: rgba(96,165,250,0.10);
+  --pink:    #F472B6;
+  --pink-bg: rgba(244,114,182,0.10);
+  --r: 12px; --rsm: 7px; --rlg: 16px;
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+  --sidebar-w: 216px;
+  --topbar-h: 52px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--font);color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg6);border-radius:2px}
+
+/* ── LAYOUT ── */
+.shell{display:flex;height:100vh;overflow:hidden}
+
+/* ══════════════════════════
+   SIDEBAR
+══════════════════════════ */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:relative;z-index:20;overflow:hidden;
+}
+.sidebar-inner{display:flex;flex-direction:column;height:100%;padding:16px 0}
+
+.logo-wrap{padding:0 14px 20px;display:flex;align-items:center;gap:9px}
+.logo-gem{
+  width:28px;height:28px;border-radius:7px;
+  background:linear-gradient(135deg,#7B6EDF,#A49CFF);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:white;
+  box-shadow:0 0 20px rgba(123,110,223,0.35);
+  flex-shrink:0;
+}
+.logo-name{font-size:14px;font-weight:600;letter-spacing:-0.3px}
+.logo-name em{font-style:normal;color:var(--text3)}
+
+.nav-sec-label{
+  font-size:9.5px;font-weight:500;color:var(--text4);
+  text-transform:uppercase;letter-spacing:0.12em;
+  padding:0 14px;margin:12px 0 3px;
+}
+.nav-item{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 14px;font-size:12.5px;color:var(--text2);
+  cursor:pointer;border-left:2px solid transparent;
+  transition:all 0.12s;user-select:none;position:relative;
+}
+.nav-item:hover{color:var(--text);background:rgba(255,255,255,0.03)}
+.nav-item.active{color:var(--accent2);background:rgba(123,110,223,0.09);border-left-color:var(--accent);font-weight:500}
+.nav-item svg{width:14px;height:14px;flex-shrink:0;opacity:0.65}
+.nav-item.active svg{opacity:1}
+.nav-badge{
+  margin-left:auto;font-size:10px;background:var(--bg5);color:var(--text2);
+  padding:1px 6px;border-radius:20px;font-family:var(--mono);
+}
+.nav-item.active .nav-badge{background:rgba(123,110,223,0.2);color:var(--accent2)}
+
+.sidebar-footer{margin-top:auto;padding:12px 10px 0;border-top:1px solid var(--border)}
+
+.quick-links{display:flex;flex-direction:column;gap:1px}
+.qlink{
+  display:flex;align-items:center;gap:7px;
+  padding:5px 8px;border-radius:var(--rsm);
+  font-size:12px;color:var(--text3);cursor:pointer;
+  transition:all 0.12s;text-decoration:none;
+}
+.qlink:hover{background:var(--bg3);color:var(--text2)}
+.qlink svg{width:12px;height:12px;flex-shrink:0}
+.qlink-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* ══════════════════════════
+   TOPBAR
+══════════════════════════ */
+.topbar{
+  display:flex;align-items:center;gap:10px;
+  padding:0 20px;height:var(--topbar-h);
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.topbar-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.topbar-greeting{font-size:13.5px;font-weight:500;letter-spacing:-0.2px;white-space:nowrap}
+.topbar-greeting span{color:var(--accent2)}
+.topbar-date{font-size:11px;color:var(--text3);font-family:var(--mono);white-space:nowrap}
+.topbar-divider{width:1px;height:16px;background:var(--border2);flex-shrink:0}
+.search-wrap{
+  display:flex;align-items:center;gap:7px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--rsm);padding:6px 10px;width:200px;
+  transition:all 0.15s;cursor:text;
+}
+.search-wrap:focus-within{border-color:var(--accent);width:240px;background:var(--bg4)}
+.search-wrap input{background:none;border:none;outline:none;font-size:12px;color:var(--text);font-family:var(--font);width:100%}
+.search-wrap input::placeholder{color:var(--text3)}
+.search-wrap svg{width:13px;height:13px;color:var(--text3);flex-shrink:0}
+.kbd{font-size:9px;color:var(--text4);background:var(--bg5);border:1px solid var(--border2);border-radius:4px;padding:1px 5px;font-family:var(--mono);white-space:nowrap;cursor:pointer}
+.topbar-right{display:flex;align-items:center;gap:6px}
+.icn-btn{
+  width:30px;height:30px;border-radius:var(--rsm);
+  background:transparent;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--text2);font-size:13px;
+  transition:all 0.12s;position:relative;
+}
+.icn-btn:hover{background:var(--bg3);color:var(--text);border-color:var(--border2)}
+.notif-dot{position:absolute;top:5px;right:5px;width:5px;height:5px;border-radius:50%;background:var(--accent);border:1.5px solid var(--bg2)}
+.live-clock{font-size:12px;font-family:var(--mono);color:var(--text2);letter-spacing:0.05em;min-width:56px;text-align:right}
+.avatar-btn{
+  width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--teal) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;color:white;cursor:pointer;
+  border:2px solid transparent;transition:border-color 0.15s;
+}
+.avatar-btn:hover{border-color:var(--accent2)}
+
+/* ══════════════════════════
+   CONTENT AREA
+══════════════════════════ */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.content-wrap{display:flex;flex:1;overflow:hidden}
+.pages{flex:1;overflow-y:auto;min-width:0}
+.page{display:none;padding:18px 20px}
+.page.active{display:block}
+
+/* ══════════════════════════
+   CARDS & LAYOUT PRIMITIVES
+══════════════════════════ */
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r)}
+.card:hover{border-color:rgba(255,255,255,0.09)}
+.card-hd{display:flex;align-items:center;justify-content:space-between;padding:13px 15px 0}
+.card-title{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.08em}
+.card-action{font-size:11px;color:var(--accent);cursor:pointer;opacity:0.8;transition:opacity 0.12s}
+.card-action:hover{opacity:1}
+.card-body{padding:11px 15px 14px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.g21{display:grid;grid-template-columns:1fr 340px;gap:12px;margin-bottom:14px}
+
+/* metrics */
+.metric{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px;transition:border-color 0.15s}
+.metric:hover{border-color:var(--border2)}
+.metric-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
+.metric-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.metric-icon svg{width:15px;height:15px}
+.badge{font-size:9.5px;padding:2px 7px;border-radius:20px;font-weight:500;font-family:var(--mono)}
+.metric-val{font-size:24px;font-weight:600;letter-spacing:-0.5px;line-height:1;margin-bottom:2px}
+.metric-lbl{font-size:11px;color:var(--text3)}
+
+/* prog */
+.pbar{height:3px;background:var(--bg5);border-radius:2px;overflow:hidden}
+.pfill{height:100%;border-radius:2px;transition:width 0.4s ease}
+
+/* tags */
+.tag{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
+.tp{background:rgba(123,110,223,0.13);color:#B8B0FF}
+.tb{background:rgba(96,165,250,0.12);color:#93C5FD}
+.ta{background:var(--amb-bg);color:#FBBF55}
+.tt{background:var(--teal-bg);color:#4EDDD4}
+.tg{background:var(--grn-bg);color:#6EE7B7}
+.tr{background:var(--red-bg);color:#FCA5A5}
+.tpk{background:var(--pink-bg);color:#F9A8D4}
+
+/* tasks */
+.task-row{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border)}
+.task-row:last-child{border-bottom:none}
+.chk{
+  width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);
+  cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:all 0.12s;background:transparent;
+}
+.chk:hover{border-color:var(--accent)}
+.chk.done{background:var(--accent);border-color:var(--accent)}
+.chk.done::after{content:'';display:block;width:7px;height:4.5px;border-left:1.5px solid white;border-bottom:1.5px solid white;transform:rotate(-45deg) translateY(-1px)}
+.task-txt{flex:1;font-size:12.5px;color:var(--text);line-height:1.4}
+.task-txt.done{color:var(--text3);text-decoration:line-through}
+.pri-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:1px}
+
+/* ══════════════════════════
+   KANBAN
+══════════════════════════ */
+.kanban-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.k-col{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);min-height:300px}
+.k-col-hd{display:flex;align-items:center;gap:7px;padding:12px 13px;border-bottom:1px solid var(--border)}
+.k-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.k-col-title{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.08em;flex:1}
+.k-count{font-size:10px;background:var(--bg5);color:var(--text3);padding:1px 7px;border-radius:20px;font-family:var(--mono)}
+.k-add{margin-left:auto;width:20px;height:20px;border-radius:5px;background:var(--bg5);border:none;color:var(--text3);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all 0.12s;flex-shrink:0}
+.k-add:hover{background:var(--accent);color:white}
+.k-body{padding:10px;display:flex;flex-direction:column;gap:7px;min-height:80px}
+.k-card{
+  background:var(--bg4);border:1px solid var(--border);border-radius:9px;
+  padding:11px 12px;cursor:grab;transition:all 0.15s;
+  position:relative;
+}
+.k-card:hover{border-color:var(--border2);background:var(--bg5)}
+.k-card.dragging{opacity:0.4;cursor:grabbing}
+.k-card.drag-over{border-color:var(--accent);box-shadow:0 0 0 2px rgba(123,110,223,0.2)}
+.k-card-prog{height:2px;background:var(--bg6);border-radius:1px;margin-bottom:7px;overflow:hidden}
+.k-card-prog-fill{height:100%;background:var(--accent);border-radius:1px}
+.k-card-title{font-size:12.5px;color:var(--text);line-height:1.4;margin-bottom:7px}
+.k-card-foot{display:flex;align-items:center;justify-content:space-between}
+.k-card-date{font-size:10px;color:var(--text3);font-family:var(--mono)}
+.k-card-done .k-card-title{text-decoration:line-through;color:var(--text3)}
+.add-form-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;margin-bottom:12px}
+.add-row{display:grid;grid-template-columns:1fr auto auto auto;gap:7px;align-items:center}
+.finput{
+  background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);
+  padding:7px 10px;font-size:12.5px;color:var(--text);font-family:var(--font);outline:none;
+  transition:border-color 0.15s;
+}
+.finput:focus{border-color:var(--accent)}
+.fselect{
+  background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);
+  padding:7px 9px;font-size:12px;color:var(--text2);font-family:var(--font);outline:none;cursor:pointer;
+}
+.btn-primary{
+  padding:7px 14px;background:var(--accent);color:white;border:none;
+  border-radius:var(--rsm);font-size:12.5px;font-weight:500;cursor:pointer;
+  font-family:var(--font);transition:opacity 0.15s;white-space:nowrap;
+}
+.btn-primary:hover{opacity:0.85}
+.btn-ghost{
+  padding:7px 12px;background:transparent;border:1px solid var(--border2);
+  color:var(--text2);border-radius:var(--rsm);font-size:12px;cursor:pointer;
+  font-family:var(--font);transition:all 0.12s;
+}
+.btn-ghost:hover{background:var(--bg4);color:var(--text)}
+
+/* ══════════════════════════
+   ACADEMICS
+══════════════════════════ */
+.subj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.subj-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r)}
+.subj-hd{padding:13px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.subj-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.subj-name{font-size:13px;font-weight:500;color:var(--text)}
+.subj-sub{font-size:11px;color:var(--text3);margin-top:1px}
+.subj-pct{margin-left:auto;font-size:12px;font-family:var(--mono)}
+.subj-prog-bar{height:2px;background:var(--bg5);margin:0 14px;overflow:hidden;border-radius:1px}
+.subj-body{padding:8px 12px 12px}
+.subj-section-lbl{font-size:9.5px;font-weight:500;color:var(--text4);text-transform:uppercase;letter-spacing:0.1em;padding:6px 2px 3px}
+.topic-row{display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:6px;cursor:pointer;transition:background 0.1s}
+.topic-row:hover{background:var(--bg4)}
+.topic-nm{font-size:12.5px;color:var(--text2)}
+.ts{font-size:9.5px;padding:2px 7px;border-radius:20px;font-weight:500;white-space:nowrap}
+.ts-done{background:var(--grn-bg);color:#6EE7B7}
+.ts-prog{background:var(--amb-bg);color:#FBBF55}
+.ts-todo{background:var(--bg5);color:var(--text3)}
+
+/* ══════════════════════════
+   FOCUS / POMODORO
+══════════════════════════ */
+.focus-layout{display:grid;grid-template-columns:1fr 260px;gap:12px}
+.timer-ring-wrap{display:flex;flex-direction:column;align-items:center;padding:20px 0 10px}
+.timer-ring{position:relative;width:140px;height:140px}
+.timer-ring svg{transform:rotate(-90deg)}
+.timer-ring-text{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.timer-main{font-size:28px;font-weight:600;font-family:var(--mono);letter-spacing:-1px;color:var(--text)}
+.timer-mode{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px}
+.timer-btns{display:flex;gap:5px;margin:10px 0}
+.t-mode-btn{
+  padding:4px 12px;border-radius:20px;border:1px solid var(--border2);
+  background:transparent;color:var(--text2);font-size:11px;cursor:pointer;font-family:var(--font);
+  transition:all 0.12s;
+}
+.t-mode-btn:hover{background:var(--bg4);color:var(--text)}
+.t-mode-btn.on{background:var(--accent);border-color:var(--accent);color:white}
+.timer-ctrls{display:flex;gap:7px;width:100%}
+.t-start{
+  flex:1;padding:8px;background:var(--accent);color:white;border:none;
+  border-radius:var(--rsm);font-size:12.5px;font-weight:500;cursor:pointer;
+  font-family:var(--font);transition:opacity 0.15s;
+}
+.t-start:hover{opacity:0.85}
+.t-reset{
+  padding:8px 12px;background:var(--bg4);color:var(--text2);
+  border:1px solid var(--border2);border-radius:var(--rsm);font-size:12px;
+  cursor:pointer;font-family:var(--font);transition:all 0.12s;
+}
+.t-reset:hover{background:var(--bg5);color:var(--text)}
+.sessions-log{display:flex;flex-direction:column;gap:5px}
+.session-item{
+  display:flex;align-items:center;gap:8px;padding:6px 8px;
+  background:var(--bg4);border-radius:6px;font-size:11.5px;
+}
+.session-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.session-desc{flex:1;color:var(--text2)}
+.session-time{font-family:var(--mono);font-size:10px;color:var(--text3)}
+
+.note-tabs{display:flex;gap:3px;margin-bottom:8px;flex-wrap:wrap}
+.note-tab{
+  padding:4px 10px;border-radius:20px;font-size:11px;cursor:pointer;
+  background:var(--bg4);color:var(--text3);border:1px solid transparent;transition:all 0.12s;
+}
+.note-tab.active-tab{background:rgba(123,110,223,0.12);color:var(--accent2);border-color:rgba(123,110,223,0.2)}
+.note-area{
+  width:100%;height:200px;resize:none;
+  background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);
+  padding:10px 12px;font-size:12.5px;color:var(--text);font-family:var(--mono);
+  line-height:1.75;outline:none;transition:border-color 0.15s;
+}
+.note-area:focus{border-color:var(--accent)}
+.note-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.note-meta{font-size:10px;color:var(--text3);font-family:var(--mono)}
+.note-action{font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;transition:color 0.12s;font-family:var(--font)}
+.note-action:hover{color:var(--accent)}
+
+/* PDF */
+.pdf-list{display:flex;flex-direction:column;gap:5px}
+.pdf-row{
+  display:flex;align-items:center;gap:9px;padding:8px 10px;
+  background:var(--bg4);border-radius:var(--rsm);cursor:pointer;
+  border:1px solid transparent;transition:all 0.12s;
+}
+.pdf-row:hover{background:var(--bg5);border-color:var(--border)}
+.pdf-ico{
+  width:28px;height:34px;border-radius:4px;
+  background:var(--red-bg);display:flex;align-items:center;justify-content:center;
+  font-size:8.5px;font-weight:700;color:var(--red);font-family:var(--mono);flex-shrink:0;
+}
+.pdf-name{font-size:12.5px;color:var(--text)}
+.pdf-sub{font-size:10.5px;color:var(--text3);margin-top:1px}
+
+/* ══════════════════════════
+   HABITS TRACKER
+══════════════════════════ */
+.habit-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border)}
+.habit-row:last-child{border-bottom:none}
+.habit-name{font-size:12.5px;color:var(--text);flex:1}
+.habit-streak{font-size:10px;color:var(--amber);font-family:var(--mono);background:var(--amb-bg);padding:2px 7px;border-radius:20px;flex-shrink:0}
+.habit-dots{display:flex;gap:3px}
+.h-dot{width:12px;height:12px;border-radius:3px;cursor:pointer;transition:all 0.12s;border:1px solid var(--border2)}
+.h-dot.done{background:var(--accent);border-color:var(--accent)}
+.h-dot:hover:not(.done){background:var(--bg5)}
+.heatmap-grid{display:grid;grid-template-columns:repeat(26,1fr);gap:2px;margin-top:6px}
+.hm-cell{width:100%;aspect-ratio:1;border-radius:2px;background:var(--bg5);cursor:pointer;transition:all 0.12s}
+.hm-cell:hover{opacity:0.8}
+.hm-l1{background:rgba(123,110,223,0.15)}
+.hm-l2{background:rgba(123,110,223,0.35)}
+.hm-l3{background:rgba(123,110,223,0.6)}
+.hm-l4{background:var(--accent)}
+
+/* ══════════════════════════
+   ANALYTICS / STATS
+══════════════════════════ */
+.chart-wrap{position:relative;width:100%;height:140px;margin-top:6px}
+.chart-canvas{width:100%;height:100%}
+.stats-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.stat-chip{flex:1;min-width:100px;background:var(--bg4);border-radius:var(--rsm);padding:10px 12px}
+.stat-chip-lbl{font-size:10px;color:var(--text3);margin-bottom:3px}
+.stat-chip-val{font-size:18px;font-weight:600;letter-spacing:-0.3px;font-family:var(--mono);color:var(--text)}
+.stat-chip-sub{font-size:10px;color:var(--text3);margin-top:2px}
+
+/* ══════════════════════════
+   PROJECTS
+══════════════════════════ */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.proj-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:border-color 0.15s}
+.proj-card:hover{border-color:var(--border2)}
+.proj-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px}
+.proj-name{font-size:14px;font-weight:600;letter-spacing:-0.2px;color:var(--text)}
+.proj-tech{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.proj-desc{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:12px}
+.proj-foot{display:flex;align-items:center;justify-content:space-between}
+.proj-pct{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.proj-links{display:flex;gap:8px}
+.proj-link{font-size:11px;color:var(--accent);cursor:pointer;text-decoration:none}
+.proj-link:hover{text-decoration:underline}
+
+/* ══════════════════════════
+
+/* ══════════════════════════
+   COMMAND PALETTE
+══════════════════════════ */
+.cmd-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:200;
+  display:none;align-items:flex-start;justify-content:center;padding-top:15vh;
+  backdrop-filter:blur(4px);
+}
+.cmd-overlay.open{display:flex}
+.cmd-box{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rlg);
+  width:560px;max-height:400px;display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,0.6);
+}
+.cmd-input-wrap{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.cmd-icon{color:var(--text3);font-size:16px;flex-shrink:0}
+.cmd-inp{
+  flex:1;background:none;border:none;outline:none;font-size:14px;color:var(--text);
+  font-family:var(--font);
+}
+.cmd-inp::placeholder{color:var(--text3)}
+.cmd-esc{font-size:10px;color:var(--text3);background:var(--bg5);border:1px solid var(--border2);border-radius:4px;padding:2px 6px;font-family:var(--mono)}
+.cmd-results{overflow-y:auto;padding:6px}
+.cmd-section{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;padding:8px 10px 4px}
+.cmd-item{
+  display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;
+  cursor:pointer;transition:background 0.1s;
+}
+.cmd-item:hover,.cmd-item.cmd-selected{background:rgba(123,110,223,0.1)}
+.cmd-item-icon{width:28px;height:28px;border-radius:7px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.cmd-item-name{font-size:13px;color:var(--text);flex:1}
+.cmd-item-hint{font-size:10px;color:var(--text3);font-family:var(--mono)}
+
+/* ══════════════════════════
+
+.btn-cancel{padding:7px 14px;background:var(--bg4);border:1px solid var(--border2);color:var(--text2);border-radius:var(--rsm);font-size:12.5px;cursor:pointer;font-family:var(--font)}
+.btn-confirm{padding:7px 14px;background:var(--accent);border:none;color:white;border-radius:var(--rsm);font-size:12.5px;cursor:pointer;font-family:var(--font);font-weight:500}
+
+/* ══════════════════════════
+   NOTIF PANEL
+══════════════════════════ */
+.notif-panel{
+  position:absolute;top:50px;right:60px;width:280px;
+  background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);
+  z-index:100;display:none;
+  box-shadow:0 16px 48px rgba(0,0,0,0.5);
+}
+.notif-panel.open{display:block}
+.notif-hd{padding:11px 13px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text);display:flex;justify-content:space-between}
+.notif-clear{font-size:10.5px;color:var(--accent);cursor:pointer}
+.notif-item{padding:10px 13px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:flex-start}
+.notif-dot-type{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.notif-body{font-size:12px;color:var(--text);line-height:1.5}
+.notif-time{font-size:10px;color:var(--text3);font-family:var(--mono);margin-top:2px}
+.notif-empty{padding:20px 13px;font-size:12px;color:var(--text3);text-align:center}
+
+/* ══════════════════════════
+   CALENDAR FULL
+══════════════════════════ */
+.cal-mini .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cday{font-size:11px;text-align:center;padding:5px 2px;border-radius:6px;cursor:pointer;color:var(--text3);transition:all 0.1s}
+.cday.hdr{font-weight:500;cursor:default;font-size:10px}
+.cday.num{color:var(--text2)}
+.cday.num:hover{background:var(--bg4);color:var(--text)}
+.cday.today{background:var(--accent);color:white;border-radius:50%;font-weight:500}
+.cday.has-ev{position:relative}
+.cday.has-ev::after{content:'';position:absolute;bottom:1px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--teal)}
+
+/* ══════════════════════════
+   SCHEDULE EVENTS
+══════════════════════════ */
+.sched-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.sched-item:last-child{border-bottom:none}
+.sched-time{font-size:10px;color:var(--text3);font-family:var(--mono);min-width:38px;padding-top:2px;flex-shrink:0}
+.sched-bar{width:3px;background:var(--accent);border-radius:2px;flex-shrink:0;min-height:32px;align-self:stretch}
+.sched-body{flex:1}
+.sched-title{font-size:12.5px;color:var(--text);margin-bottom:3px}
+
+/* ══════════════════════════
+   UTILS
+══════════════════════════ */
+.sep{height:1px;background:var(--border);margin:6px 0}
+.flex{display:flex}
+.flex-center{display:flex;align-items:center}
+.gap-6{gap:6px}
+.mt-10{margin-top:10px}
+.text-mono{font-family:var(--mono)}
+code{font-family:var(--mono);background:var(--bg5);padding:1px 5px;border-radius:4px;font-size:11.5px;color:var(--teal)}
+</style>
+</head>
+<body>
+
+<div class="shell">
+<!-- ══════════════════════════════════
+     SIDEBAR
+══════════════════════════════════ -->
+<aside class="sidebar">
+<div class="sidebar-inner">
+  <div class="logo-wrap">
+    <div class="logo-gem">M</div>
+    <div class="logo-name">MD <em>OS</em></div>
+  </div>
+
+  <div class="nav-sec-label">Core</div>
+  <div class="nav-item active" onclick="nav('overview',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg>
+    Overview
+  </div>
+  <div class="nav-item" onclick="nav('tasks',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M5 8l2 2 4-4"/></svg>
+    Tasks
+    <span class="nav-badge" id="nav-task-count">5</span>
+  </div>
+  <div class="nav-item" onclick="nav('focus',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="3"/><circle cx="8" cy="8" r="7"/></svg>
+    Focus
+  </div>
+  <div class="nav-item" onclick="nav('habits',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1v14M1 8h14"/><circle cx="8" cy="8" r="3"/></svg>
+    Habits
+    <span class="nav-badge">7🔥</span>
+  </div>
+
+  <div class="nav-sec-label">Study</div>
+  <div class="nav-item" onclick="nav('academics',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1L15 5v3c0 3.5-3 6-7 7C4 14 1 11.5 1 8V5l7-4z"/></svg>
+    Academics
+  </div>
+  <div class="nav-item" onclick="nav('projects',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12L6 2l3 7 2-3 4 6H1z"/></svg>
+    Projects
+  </div>
+  <div class="nav-item" onclick="nav('analytics',this)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 13L5 8l3 3 3-5 4 5"/><path d="M1 13h14"/></svg>
+    Analytics
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="nav-sec-label" style="padding:0 2px;margin:6px 0 4px">Quick links</div>
+    <div class="quick-links">
+      <a class="qlink" href="https://notion.so" target="_blank"><div class="qlink-dot" style="background:#fff"></div>Notion</a>
+      <a class="qlink" href="https://figma.com" target="_blank"><div class="qlink-dot" style="background:#a259ff"></div>Figma</a>
+      <a class="qlink" href="https://github.com" target="_blank"><div class="qlink-dot" style="background:#6e40c9"></div>GitHub</a>
+      <a class="qlink" href="https://vercel.com" target="_blank"><div class="qlink-dot" style="background:#fff"></div>Vercel</a>
+      <a class="qlink" href="https://supabase.com" target="_blank"><div class="qlink-dot" style="background:#3ecf8e"></div>Supabase</a>
+      <a class="qlink" href="https://claude.ai" target="_blank"><div class="qlink-dot" style="background:#d97706"></div>Claude</a>
+    </div>
+  </div>
+</div>
+</aside>
+
+<!-- ══════════════════════════════════
+     MAIN
+══════════════════════════════════ -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-greeting" id="topbar-greeting">Good morning, <span>Rohan</span> 👋</div>
+      <div class="topbar-divider"></div>
+      <div class="topbar-date" id="topbar-date"></div>
+    </div>
+    <div class="search-wrap" onclick="openCmd()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="5"/><path d="M12 12l3 3"/></svg>
+      <input type="text" placeholder="Search or command..." id="topbar-search" readonly onclick="openCmd()"/>
+      <span class="kbd" onclick="openCmd()">⌘K</span>
+    </div>
+    <div class="topbar-right">
+      <div class="live-clock" id="live-clock">00:00:00</div>
+      <div class="icn-btn" onclick="toggleNotif()" title="Notifications">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1a5 5 0 015 5c0 3 1 4 1 4H2s1-1 1-4a5 5 0 015-5z"/><path d="M6.5 14a1.5 1.5 0 003 0"/></svg>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="avatar-btn" title="Rohan MD">R</div>
+    </div>
+  </div>
+
+  <div class="content-wrap">
+    <div class="pages" id="pages">
+
+      <!-- ══ OVERVIEW ══ -->
+      <div class="page active" id="page-overview">
+        <div class="g4">
+          <div class="metric">
+            <div class="metric-top">
+              <div class="metric-icon" style="background:rgba(123,110,223,0.12)"><svg viewBox="0 0 16 16" fill="none" stroke="#A49CFF" stroke-width="1.5"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M5 8l2 2 4-4"/></svg></div>
+              <span class="badge" style="background:var(--grn-bg);color:var(--green)">+2 today</span>
+            </div>
+            <div class="metric-val">18</div>
+            <div class="metric-lbl">Tasks completed</div>
+          </div>
+          <div class="metric">
+            <div class="metric-top">
+              <div class="metric-icon" style="background:var(--amb-bg)"><svg viewBox="0 0 16 16" fill="none" stroke="#F2A233" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M8 4v4l3 2"/></svg></div>
+              <span class="badge" style="background:var(--amb-bg);color:var(--amber)">Active</span>
+            </div>
+            <div class="metric-val">5</div>
+            <div class="metric-lbl">In progress</div>
+          </div>
+          <div class="metric">
+            <div class="metric-top">
+              <div class="metric-icon" style="background:var(--teal-bg)"><svg viewBox="0 0 16 16" fill="none" stroke="#22D3C8" stroke-width="1.5"><path d="M8 1L15 5v3c0 3.5-3 6-7 7C4 14 1 11.5 1 8V5l7-4z"/></svg></div>
+              <span class="badge" style="background:var(--teal-bg);color:var(--teal)">AS Level</span>
+            </div>
+            <div class="metric-val">11</div>
+            <div class="metric-lbl">Topics covered</div>
+          </div>
+          <div class="metric">
+            <div class="metric-top">
+              <div class="metric-icon" style="background:var(--amb-bg)"><svg viewBox="0 0 16 16" fill="none" stroke="#F2A233" stroke-width="1.5"><path d="M8 2c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6 2.7-6 6-6z"/><path d="M8 2v1M8 13v1M2 8h1M13 8h1"/></svg></div>
+              <span class="badge" style="background:var(--amb-bg);color:var(--amber)">🔥 Streak</span>
+            </div>
+            <div class="metric-val">7d</div>
+            <div class="metric-lbl">Focus streak</div>
+          </div>
+        </div>
+
+        <div class="g21">
+          <div>
+            <div class="card" style="margin-bottom:12px">
+              <div class="card-hd"><span class="card-title">Priority tasks</span><span class="card-action" onclick="nav('tasks',document.querySelectorAll('.nav-item')[1])">View all →</span></div>
+              <div class="card-body" id="ov-task-list">
+                <div class="task-row"><div class="pri-dot" style="background:var(--red)"></div><div class="chk" onclick="toggleChk(this)"></div><div class="task-txt">Review Kinematics notes for mock test</div><span class="tag tp">Physics</span></div>
+                <div class="task-row"><div class="pri-dot" style="background:var(--red)"></div><div class="chk done" onclick="toggleChk(this)"></div><div class="task-txt done">Quadratics problem set — P1</div><span class="tag tb">Maths</span></div>
+                
+                <div class="task-row"><div class="pri-dot" style="background:var(--amber)"></div><div class="chk done" onclick="toggleChk(this)"></div><div class="task-txt done">Read Macroeconomics section 4</div><span class="tag ta">Econ</span></div>
+                <div class="task-row"><div class="pri-dot" style="background:var(--green)"></div><div class="chk" onclick="toggleChk(this)"></div><div class="task-txt">Update GLOBALDESK IMF API feed</div><span class="tag tt">Project</span></div>
+              </div>
+            </div>
+            <div class="g2" style="margin-bottom:0">
+              <div class="card">
+                <div class="card-hd"><span class="card-title">Academic progress</span></div>
+                <div class="card-body">
+                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Physics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">5/11</span></div><div class="pbar"><div class="pfill" style="width:45%;background:var(--accent)"></div></div></div>
+                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Mathematics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">3/12</span></div><div class="pbar"><div class="pfill" style="width:25%;background:var(--blue)"></div></div></div>
+                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Economics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">2/6</span></div><div class="pbar"><div class="pfill" style="width:33%;background:var(--amber)"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Accounts</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">1/8</span></div><div class="pbar"><div class="pfill" style="width:12%;background:var(--teal)"></div></div></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-hd"><span class="card-title">Today's schedule</span></div>
+                <div class="card-body">
+                  <div class="sched-item"><div class="sched-time">09:00</div><div class="sched-bar" style="background:var(--accent)"></div><div class="sched-body"><div class="sched-title">Physics — Kinematics revision</div><span class="tag tp" style="margin-top:3px;display:inline-block">Physics</span></div></div>
+                  <div class="sched-item"><div class="sched-time">11:30</div><div class="sched-bar" style="background:var(--teal)"></div><div class="sched-body"><div class="sched-title">GRYDX API debugging</div><span class="tag tt" style="margin-top:3px;display:inline-block">GRYDX</span></div></div>
+                  <div class="sched-item"><div class="sched-time">15:00</div><div class="sched-bar" style="background:var(--amber)"></div><div class="sched-body"><div class="sched-title">Economics — Macroeconomy</div><span class="tag ta" style="margin-top:3px;display:inline-block">Econ</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:12px">
+              <div class="card-hd"><span class="card-title">May 2025</span><div style="display:flex;gap:3px"><button class="btn-ghost" style="padding:3px 8px;font-size:12px">‹</button><button class="btn-ghost" style="padding:3px 8px;font-size:12px">›</button></div></div>
+              <div class="card-body cal-mini">
+                <div class="cal-grid">
+                  <div class="cday hdr">Su</div><div class="cday hdr">Mo</div><div class="cday hdr">Tu</div><div class="cday hdr">We</div><div class="cday hdr">Th</div><div class="cday hdr">Fr</div><div class="cday hdr">Sa</div>
+                  <div class="cday"></div><div class="cday"></div><div class="cday"></div><div class="cday num has-ev">1</div><div class="cday num has-ev">2</div><div class="cday num">3</div><div class="cday num">4</div>
+                  <div class="cday num today">5</div><div class="cday num has-ev">6</div><div class="cday num">7</div><div class="cday num has-ev">8</div><div class="cday num">9</div><div class="cday num">10</div><div class="cday num">11</div>
+                  <div class="cday num">12</div><div class="cday num has-ev">13</div><div class="cday num">14</div><div class="cday num has-ev">15</div><div class="cday num">16</div><div class="cday num">17</div><div class="cday num">18</div>
+                  <div class="cday num has-ev">19</div><div class="cday num">20</div><div class="cday num">21</div><div class="cday num">22</div><div class="cday num">23</div><div class="cday num">24</div><div class="cday num">25</div>
+                  <div class="cday num">26</div><div class="cday num">27</div><div class="cday num">28</div><div class="cday num">29</div><div class="cday num">30</div><div class="cday num">31</div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-hd"><span class="card-title">Habit streak</span></div>
+              <div class="card-body">
+                <div class="habit-row">
+                  <div class="habit-name">Deep work (4h+)</div>
+                  <div class="habit-streak">7🔥</div>
+                  <div class="habit-dots" id="hw-dots"></div>
+                </div>
+                <div class="habit-row">
+                  <div class="habit-name">Read / research</div>
+                  <div class="habit-streak">5🔥</div>
+                  <div class="habit-dots" id="rr-dots"></div>
+                </div>
+                <div class="habit-row">
+                  <div class="habit-name">Exercise</div>
+                  <div class="habit-streak">3🔥</div>
+                  <div class="habit-dots" id="ex-dots"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ TASKS KANBAN ══ -->
+      <div class="page" id="page-tasks">
+        <div class="add-form-wrap">
+          <div class="add-row">
+            <input class="finput" id="new-task-inp" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTask()"/>
+            <select class="fselect" id="ntcat"><option>Physics</option><option>Maths</option><option>Economics</option><option>Accounts</option><option>Project</option><option>Other</option></select>
+            <select class="fselect" id="ntpri"><option value="h">High</option><option value="m">Medium</option><option value="l">Low</option></select>
+            <button class="btn-primary" onclick="addTask()">+ Add task</button>
+          </div>
+        </div>
+        <div class="kanban-wrap">
+          <div class="k-col" ondragover="event.preventDefault();dragOver(this)" ondrop="drop(event,'todo')">
+            <div class="k-col-hd"><div class="k-dot" style="background:var(--text3)"></div><div class="k-col-title">To do</div><div class="k-count" id="kc-todo">2</div><button class="k-add" onclick="focusAdd()">+</button></div>
+            <div class="k-body" id="kcol-todo">
+              <div class="k-card" draggable="true" ondragstart="dragStart(this,'todo')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'todo')"><div class="k-card-prog"><div class="k-card-prog-fill" style="width:0%"></div></div><div class="k-card-title">Review Kinematics notes for mock test</div><div class="k-card-foot"><span class="tag tp">Physics</span><span class="k-card-date">Due today</span></div></div>
+              
+              <div class="k-card" draggable="true" ondragstart="dragStart(this,'todo')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'todo')"><div class="k-card-prog"><div class="k-card-prog-fill" style="width:0%"></div></div><div class="k-card-title">Functions worksheet exercises</div><div class="k-card-foot"><span class="tag tb">Maths</span><span class="k-card-date">May 8</span></div></div>
+            </div>
+          </div>
+          <div class="k-col" ondragover="event.preventDefault();dragOver(this)" ondrop="drop(event,'prog')">
+            <div class="k-col-hd"><div class="k-dot" style="background:var(--amber)"></div><div class="k-col-title">In progress</div><div class="k-count" id="kc-prog">1</div></div>
+            <div class="k-body" id="kcol-prog">
+              
+              <div class="k-card" draggable="true" ondragstart="dragStart(this,'prog')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'prog')"><div class="k-card-prog"><div class="k-card-prog-fill" style="width:33%"></div></div><div class="k-card-title">Government Microeconomic Intervention notes</div><div class="k-card-foot"><span class="tag ta">Econ</span><span class="k-card-date">33%</span></div></div>
+            </div>
+          </div>
+          <div class="k-col" ondragover="event.preventDefault();dragOver(this)" ondrop="drop(event,'done')">
+            <div class="k-col-hd"><div class="k-dot" style="background:var(--green)"></div><div class="k-col-title">Done</div><div class="k-count" id="kc-done">2</div></div>
+            <div class="k-body" id="kcol-done">
+              <div class="k-card k-card-done" draggable="true" ondragstart="dragStart(this,'done')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'done')"><div class="k-card-title">Quadratics problem set — P1</div><div class="k-card-foot"><span class="tag tb">Maths</span><span class="k-card-date" style="color:var(--green)">✓ Done</span></div></div>
+              <div class="k-card k-card-done" draggable="true" ondragstart="dragStart(this,'done')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'done')"><div class="k-card-title">Read Macroeconomics section 4</div><div class="k-card-foot"><span class="tag ta">Econ</span><span class="k-card-date" style="color:var(--green)">✓ Done</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ FOCUS ══ -->
+      <div class="page" id="page-focus">
+        <div style="display:grid;grid-template-columns:1fr 280px;gap:12px">
+
+          <!-- LEFT: Timer + Sessions -->
+          <div>
+            <div class="card" style="margin-bottom:12px">
+              <div class="card-hd"><span class="card-title">Pomodoro Timer</span></div>
+              <div class="card-body">
+                <div class="timer-ring-wrap">
+                  <div class="timer-ring">
+                    <svg width="140" height="140" viewBox="0 0 140 140">
+                      <circle cx="70" cy="70" r="60" fill="none" stroke="var(--bg5)" stroke-width="6"/>
+                      <circle id="ring-circle" cx="70" cy="70" r="60" fill="none" stroke="var(--accent)" stroke-width="6"
+                        stroke-dasharray="377" stroke-dashoffset="0" stroke-linecap="round" style="transition:stroke-dashoffset 0.5s ease"/>
+                    </svg>
+                    <div class="timer-ring-text">
+                      <div class="timer-main" id="timer-disp">25:00</div>
+                      <div class="timer-mode" id="timer-mode-lbl">Focus</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="timer-btns">
+                  <button class="t-mode-btn on" onclick="setTimerMode('focus',25,this)">Focus 25</button>
+                  <button class="t-mode-btn" onclick="setTimerMode('short',5,this)">Break 5</button>
+                  <button class="t-mode-btn" onclick="setTimerMode('long',15,this)">Break 15</button>
+                  <button class="t-mode-btn" onclick="setTimerMode('deep',60,this)">Deep 60</button>
+                </div>
+                <div class="pbar" style="margin:8px 0 12px"><div class="pfill" id="timer-pbar" style="width:100%;background:var(--accent)"></div></div>
+                <div class="timer-ctrls">
+                  <button class="t-start" id="t-start-btn" onclick="toggleTimer()">▶ Start</button>
+                  <button class="t-reset" onclick="resetTimer()">↺ Reset</button>
+                </div>
+                <div style="margin-top:14px">
+                  <div class="card-title" style="margin-bottom:7px">Today's sessions</div>
+                  <div class="sessions-log" id="sessions-log">
+                    <div class="session-item"><div class="session-dot" style="background:var(--accent)"></div><div class="session-desc">Physics revision — Kinematics</div><div class="session-time">09:00 · 25m</div></div>
+                    <div class="session-item"><div class="session-dot" style="background:var(--teal)"></div><div class="session-desc">GRYDX debugging</div><div class="session-time">10:30 · 45m</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-hd"><span class="card-title">Quick formulas</span></div>
+              <div class="card-body">
+                <div style="font-size:10.5px;color:var(--text3);margin-bottom:5px">Physics — Kinematics</div>
+                <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:10px">
+                  <div style="font-size:11.5px;font-family:var(--mono);color:var(--text2);background:var(--bg4);padding:4px 8px;border-radius:5px">v = u + at</div>
+                  <div style="font-size:11.5px;font-family:var(--mono);color:var(--text2);background:var(--bg4);padding:4px 8px;border-radius:5px">s = ut + ½at²</div>
+                  <div style="font-size:11.5px;font-family:var(--mono);color:var(--text2);background:var(--bg4);padding:4px 8px;border-radius:5px">v² = u² + 2as</div>
+                </div>
+                <div style="font-size:10.5px;color:var(--text3);margin-bottom:5px">Maths — Quadratic formula</div>
+                <div style="font-size:11.5px;font-family:var(--mono);color:var(--text2);background:var(--bg4);padding:4px 8px;border-radius:5px;margin-bottom:10px">x = (-b ± √(b²-4ac)) / 2a</div>
+                <div style="font-size:10.5px;color:var(--text3);margin-bottom:5px">Economics — Aggregate Demand</div>
+                <div style="font-size:11.5px;font-family:var(--mono);color:var(--text2);background:var(--bg4);padding:4px 8px;border-radius:5px">AD = C + I + G + (X-M)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MIDDLE: Notes -->
+          <div>
+            <div class="card" style="height:100%">
+              <div class="card-hd"><span class="card-title">Notes</span>
+                <div style="display:flex;gap:5px">
+                  <button class="note-action" onclick="saveNote()">💾 Save</button>
+                  <button class="note-action" onclick="clearNote()">Clear</button>
+                </div>
+              </div>
+              <div class="card-body" style="display:flex;flex-direction:column;height:calc(100% - 40px)">
+                <div class="note-tabs" id="note-tabs">
+                  <div class="note-tab active-tab" onclick="switchNote('physics',this)">Physics</div>
+                  <div class="note-tab" onclick="switchNote('maths',this)">Maths</div>
+                  <div class="note-tab" onclick="switchNote('econ',this)">Econ</div>
+                  <div class="note-tab" onclick="switchNote('accounts',this)">Accounts</div>
+                  <div class="note-tab" onclick="switchNote('grydx',this)">GRYDX</div>
+                  <div class="note-tab" onclick="switchNote('general',this)">General</div>
+                </div>
+                <textarea class="note-area" id="note-area" placeholder="Start typing..." style="flex:1;height:auto;min-height:300px"></textarea>
+                <div class="note-footer">
+                  <span class="note-meta" id="note-meta">0 chars</span>
+                  <span class="note-meta" id="note-saved-indicator"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Music Player + PDFs -->
+          <div>
+            <div class="card"><div class="card-hd"><span class="card-title">Mood</span></div>
+              <div class="card-body" style="display:flex;flex-wrap:wrap;gap:5px">
+                
+                
+                
+                
+                
+                
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-hd"><span class="card-title">Syllabus PDFs</span></div>
+              <div class="card-body">
+                <div class="pdf-list">
+                  <div class="pdf-row"><div class="pdf-ico">PDF</div><div><div class="pdf-name">Physics AS</div><div class="pdf-sub">Cambridge 9702</div></div></div>
+                  <div class="pdf-row"><div class="pdf-ico">PDF</div><div><div class="pdf-name">Mathematics AS/A2</div><div class="pdf-sub">Cambridge 9709</div></div></div>
+                  <div class="pdf-row"><div class="pdf-ico">PDF</div><div><div class="pdf-name">Economics AS/A2</div><div class="pdf-sub">Cambridge 9708</div></div></div>
+                  <div class="pdf-row"><div class="pdf-ico">PDF</div><div><div class="pdf-name">Accounts AS</div><div class="pdf-sub">Cambridge 9706</div></div></div>
+                  <div class="pdf-row"><div class="pdf-ico">PDF</div><div><div class="pdf-name">English AS</div><div class="pdf-sub">Cambridge</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ HABITS ══ -->
+      <div class="page" id="page-habits">
+        <div class="g2">
+          <div class="card">
+            <div class="card-hd"><span class="card-title">Daily habits — today</span></div>
+            <div class="card-body">
+              <div class="habit-row"><div class="habit-name">Deep work session (4h+)</div><div class="habit-streak">7🔥</div><div class="habit-dots" id="hd-dw"></div></div>
+              <div class="habit-row"><div class="habit-name">Read / research 30min</div><div class="habit-streak">5🔥</div><div class="habit-dots" id="hd-rd"></div></div>
+              <div class="habit-row"><div class="habit-name">Exercise</div><div class="habit-streak">3🔥</div><div class="habit-dots" id="hd-ex"></div></div>
+              <div class="habit-row"><div class="habit-name">Review tomorrow's tasks</div><div class="habit-streak">6🔥</div><div class="habit-dots" id="hd-rv"></div></div>
+              <div class="habit-row"><div class="habit-name">Code / project work</div><div class="habit-streak">7🔥</div><div class="habit-dots" id="hd-cd"></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-hd"><span class="card-title">Completion heatmap — last 6 months</span></div>
+            <div class="card-body">
+              <div class="heatmap-grid" id="heatmap"></div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:8px;justify-content:flex-end">
+                <span style="font-size:10px;color:var(--text3)">Less</span>
+                <div style="width:10px;height:10px;border-radius:2px;background:var(--bg5)"></div>
+                <div style="width:10px;height:10px;border-radius:2px;background:rgba(123,110,223,0.15)"></div>
+                <div style="width:10px;height:10px;border-radius:2px;background:rgba(123,110,223,0.35)"></div>
+                <div style="width:10px;height:10px;border-radius:2px;background:rgba(123,110,223,0.6)"></div>
+                <div style="width:10px;height:10px;border-radius:2px;background:var(--accent)"></div>
+                <span style="font-size:10px;color:var(--text3)">More</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">Weekly habit completion</span></div>
+          <div class="card-body">
+            <canvas id="habit-chart" height="80"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ ACADEMICS ══ -->
+      <div class="page" id="page-academics">
+        <div class="subj-grid">
+
+          <!-- PHYSICS -->
+          <div class="subj-card">
+            <div class="subj-hd"><div class="subj-icon" style="background:rgba(123,110,223,0.12)">⚛</div><div><div class="subj-name">Physics</div><div class="subj-sub">Cambridge 9702 · AS + A2 Levels</div></div><div class="subj-pct" style="color:var(--accent2)">0%</div></div>
+            <div class="subj-prog-bar"><div class="pfill" style="width:0%;background:var(--accent)" id="prog-physics"></div></div>
+            <div class="subj-body">
+              <div class="subj-section-lbl">AS Level</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Kinematics</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Dynamics</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Forces, Density & Pressure</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Work, Energy & Power</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Deformation of Solids</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Waves</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Superposition</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Electricity</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">D.C. Circuits</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Particle Physics</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Physical Quantities & Units</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">A2 Level</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Motion in a Circle</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Gravitational Fields</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Temperature</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Ideal Gases</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Thermodynamics</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Oscillations</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Electric Fields</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Capacitance</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Magnetic Fields</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Alternating Currents</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Quantum Physics</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Nuclear Physics</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Medical Physics</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Astronomy & Cosmology</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">Examinations</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 1 — Multiple Choice</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 2 — Structured Questions</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 3 — Alternate to Practical</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 4 — Structured Questions</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 5 — Planning, Analysis & Evaluation</span><span class="ts ts-todo">To do</span></div>
+            </div>
+          </div>
+
+          <!-- MATHEMATICS -->
+          <div class="subj-card">
+            <div class="subj-hd"><div class="subj-icon" style="background:var(--blue-bg)">∑</div><div><div class="subj-name">Mathematics</div><div class="subj-sub">Cambridge 9709 · AS + A2 Levels</div></div><div class="subj-pct" style="color:var(--blue)">0%</div></div>
+            <div class="subj-prog-bar"><div class="pfill" style="width:0%;background:var(--blue)" id="prog-maths"></div></div>
+            <div class="subj-body">
+              <div class="subj-section-lbl">AS Level — Pure Mathematics 1</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Quadratics</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Functions</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Coordinate Geometry</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Circular Measure</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Trigonometry</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Series</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Differentiation</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Further Differentiation</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Integration</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">AS Level — Probability & Statistics 1</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Representation of Data</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Permutations & Combinations</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Probability</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Discrete Random Variables</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">The Normal Distribution</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">A2 Level — Pure Mathematics 3</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Algebra</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Logarithmic & Exponential Functions</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Trigonometry (P3)</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Differentiation (P3)</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Integration (P3)</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Numerical Solutions of Equations</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Vectors</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Differential Equations</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Complex Numbers</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">A2 Level — Mechanics</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Forces & Equilibrium</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Kinematics of a Motion in a Straight Line</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Momentum</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Newton's Law of Motion</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Energy, Work & Power</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">Examinations</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 1 — Pure 1</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 3 — Pure 2</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 4 — Statistics & Probability 1</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 5 — Mechanics 1</span><span class="ts ts-todo">To do</span></div>
+            </div>
+          </div>
+
+          <!-- ECONOMICS -->
+          <div class="subj-card">
+            <div class="subj-hd"><div class="subj-icon" style="background:var(--amb-bg)">📈</div><div><div class="subj-name">Economics</div><div class="subj-sub">Cambridge 9708 · AS + A2 Levels</div></div><div class="subj-pct" style="color:var(--amber)">0%</div></div>
+            <div class="subj-prog-bar"><div class="pfill" style="width:0%;background:var(--amber)" id="prog-econ"></div></div>
+            <div class="subj-body">
+              <div class="subj-section-lbl">AS Level</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Basic Economic Ideas & Resource Allocation</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">The Price System & Microeconomy</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Government Microeconomic Intervention</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">The Macroeconomy</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Government Macroeconomic Intervention</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">International Economic Intervention</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">A2 Level</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">The Price System & Microeconomy</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Government Microeconomic Intervention</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">The Macroeconomy (A2)</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Government Macroeconomic Intervention (A2)</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">International Economic Intervention (A2)</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">Examinations</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 1 — MCQ</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 2 — Data Response & Essay</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 3 — MCQ</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 4 — Data Response & Essay</span><span class="ts ts-todo">To do</span></div>
+            </div>
+          </div>
+
+          <!-- ACCOUNTS -->
+          <div class="subj-card">
+            <div class="subj-hd"><div class="subj-icon" style="background:var(--teal-bg)">📒</div><div><div class="subj-name">Accounts</div><div class="subj-sub">Cambridge 9706 · AS Level</div></div><div class="subj-pct" style="color:var(--teal)">0%</div></div>
+            <div class="subj-prog-bar"><div class="pfill" style="width:0%;background:var(--teal)" id="prog-accounts"></div></div>
+            <div class="subj-body">
+              <div class="subj-section-lbl">AS Level — Financial Accounting</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Types of Business Entity</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">The Accounting System</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Accounting for Non-current Assets</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Reconciliation & Verification</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Preparation of Financial Statements</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Analysis & Communication of Accounting Info</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">AS Level — Cost & Management Accounting</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Costs & Cost Behaviour</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Traditional Costing Methods</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">Examinations</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 1 — MCQ</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Paper 2 — Fundamentals of Accounting</span><span class="ts ts-todo">To do</span></div>
+            </div>
+          </div>
+
+          <!-- ENGLISH -->
+          <div class="subj-card">
+            <div class="subj-hd"><div class="subj-icon" style="background:var(--pink-bg)">✍️</div><div><div class="subj-name">English</div><div class="subj-sub">Cambridge · AS Level</div></div><div class="subj-pct" style="color:var(--pink)">0%</div></div>
+            <div class="subj-prog-bar"><div class="pfill" style="width:0%;background:var(--pink)" id="prog-english"></div></div>
+            <div class="subj-body">
+              <div class="subj-section-lbl">AS Level — Topics</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Political, Social, Economic & Ethical Issues</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Science, Technology & Environment</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">The Macroeconomy</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Culture, Media & Arts</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">Assessment Objectives</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">AO1 — Use of Information</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">AO2 — Analysis & Evaluation</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">AO3 — Communication of Ideas</span><span class="ts ts-todo">To do</span></div>
+              <div class="subj-section-lbl">Examinations</div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Reading Comprehension</span><span class="ts ts-todo">To do</span></div>
+              <div class="topic-row" onclick="cycleTopic(this)"><span class="topic-nm">Writing</span><span class="ts ts-todo">To do</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══ PROJECTS ══ -->
+      <div class="page" id="page-projects">
+        <div class="proj-grid">
+          <div class="proj-card"><div class="proj-hd"><div class="proj-name">GRYDX</div><span class="tag ta">Finance / AI</span></div><div class="proj-tech"><span class="tag tb">Python</span><span class="tag tt">Bloomberg API</span><span class="tag tp">AI</span></div><div class="proj-desc">Spreadsheet platform built for finance. Bloomberg API integration, version control, AI chatbot that scans errors, auto-fixes, formula generation, and model effectiveness scoring.</div><div class="pbar" style="margin-bottom:7px"><div class="pfill" style="width:65%;background:var(--amber)"></div></div><div class="proj-foot"><span class="proj-pct">65% complete</span><div class="proj-links"><a class="proj-link" href="https://github.com" target="_blank">GitHub →</a></div></div></div>
+          <div class="proj-card"><div class="proj-hd"><div class="proj-name">End-to-End ML Model</div><span class="tag tp">Machine Learning</span></div><div class="proj-tech"><span class="tag tb">Pandas</span><span class="tag tg">scikit-learn</span><span class="tag tt">Yahoo Finance</span></div><div class="proj-desc">Using Forest, Pandas and Yahoo Finance to turn a single-stock ML model into a multi-stock model with adjusted higher risk rate while maintaining volatility score.</div><div class="pbar" style="margin-bottom:7px"><div class="pfill" style="width:45%;background:var(--accent)"></div></div><div class="proj-foot"><span class="proj-pct">45% complete</span><div class="proj-links"><a class="proj-link" href="https://github.com" target="_blank">GitHub →</a></div></div></div>
+          <div class="proj-card"><div class="proj-hd"><div class="proj-name">PITAR</div><span class="tag tt">AR / Trading</span></div><div class="proj-tech"><span class="tag tb">Computer Vision</span><span class="tag tpk">AR</span><span class="tag tg">Real-time</span></div><div class="proj-desc">Augmented Reality engine that deciphers trade hand signals in real time and executes trades in open out-cry trade situations.</div><div class="pbar" style="margin-bottom:7px"><div class="pfill" style="width:30%;background:var(--teal)"></div></div><div class="proj-foot"><span class="proj-pct">30% complete</span><div class="proj-links"><a class="proj-link" href="https://github.com" target="_blank">GitHub →</a></div></div></div>
+          <div class="proj-card"><div class="proj-hd"><div class="proj-name">GLOBALDESK</div><span class="tag tg">Macro / Data</span></div><div class="proj-tech"><span class="tag tb">World Bank API</span><span class="tag tt">IMF API</span><span class="tag tp">Three.js</span></div><div class="proj-desc">A 3D interactive globe functioning as a real-time macro-economic intelligence dashboard. Pulls live data from World Bank and IMF APIs, mapping GDP, inflation, FDI flows and growth forecasts. 6 bilateral capital flow monitors, anomaly detection feeds.</div><div class="pbar" style="margin-bottom:7px"><div class="pfill" style="width:55%;background:var(--green)"></div></div><div class="proj-foot"><span class="proj-pct">55% complete</span><div class="proj-links"><a class="proj-link" href="https://vercel.com" target="_blank">Vercel →</a><a class="proj-link" href="https://github.com" target="_blank">GitHub →</a></div></div></div>
+          <div class="proj-card" style="grid-column:1/-1"><div class="proj-hd"><div class="proj-name">Efficient Attention for Long-Horizon Financial Forecasting</div><span class="tag tb">Research Article</span></div><div class="proj-tech"><span class="tag tp">Transformer</span><span class="tag tt">Reformer</span><span class="tag tpk">Performer</span><span class="tag ta">O(N log N)</span></div><div class="proj-desc">Compares Transformer, Reformer and Performer ML models on financial forecasting (prediction engine). Mainly dives into depth about how the Reformer achieves O(N log N) complexity on long sequences via locality-sensitive hashing — vs the standard O(N²) of vanilla attention — without sacrificing predictive power on financial time series.</div><div class="pbar" style="margin-bottom:7px"><div class="pfill" style="width:80%;background:var(--blue)"></div></div><div class="proj-foot"><span class="proj-pct">80% complete</span><span style="font-size:11px;color:var(--text3)">Article · In writing</span></div></div>
+        </div>
+      </div>
+
+      <!-- ══ ANALYTICS ══ -->
+      <div class="page" id="page-analytics">
+        <div class="stats-row">
+          <div class="stat-chip"><div class="stat-chip-lbl">Total focus time</div><div class="stat-chip-val">47h</div><div class="stat-chip-sub">This month</div></div>
+          <div class="stat-chip"><div class="stat-chip-lbl">Tasks done</div><div class="stat-chip-val">89</div><div class="stat-chip-sub">This month</div></div>
+          <div class="stat-chip"><div class="stat-chip-lbl">Topics mastered</div><div class="stat-chip-val">11</div><div class="stat-chip-sub">of 36 total</div></div>
+          <div class="stat-chip"><div class="stat-chip-lbl">Avg session</div><div class="stat-chip-val">38m</div><div class="stat-chip-sub">Per day</div></div>
+          <div class="stat-chip"><div class="stat-chip-lbl">Best day</div><div class="stat-chip-val">Apr 28</div><div class="stat-chip-sub">4h 20m focus</div></div>
+        </div>
+        <div class="g2">
+          <div class="card"><div class="card-hd"><span class="card-title">Focus hours — last 14 days</span></div><div class="card-body"><canvas id="focus-chart" height="120"></canvas></div></div>
+          <div class="card"><div class="card-hd"><span class="card-title">Tasks completed — by subject</span></div><div class="card-body"><canvas id="tasks-chart" height="120"></canvas></div></div>
+        </div>
+        <div class="g2" style="margin-bottom:0">
+          <div class="card"><div class="card-hd"><span class="card-title">Weekly productivity score</span></div><div class="card-body"><canvas id="prod-chart" height="100"></canvas></div></div>
+          <div class="card"><div class="card-hd"><span class="card-title">Subject time allocation</span></div><div class="card-body"><canvas id="pie-chart" height="100"></canvas></div></div>
+        </div>
+      </div>
+
+    </div><!-- /pages -->
+
+    <!-- ══════════════════════
+  </div>
+</div>
+</div>
+
+<!-- ══ COMMAND PALETTE ══ -->
+<div class="cmd-overlay" id="cmd-overlay" onclick="if(event.target===this)closeCmd()">
+  <div class="cmd-box">
+    <div class="cmd-input-wrap">
+      <svg class="cmd-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="5"/><path d="M12 12l3 3"/></svg>
+      <input class="cmd-inp" id="cmd-inp" placeholder="Search pages, tasks, ask assistant..." oninput="filterCmd(this.value)" onkeydown="cmdKey(event)"/>
+      <span class="cmd-esc" onclick="closeCmd()">ESC</span>
+    </div>
+    <div class="cmd-results" id="cmd-results">
+      <div class="cmd-section">Navigate</div>
+      <div class="cmd-item cmd-selected" onclick="cmdNav('overview')"><div class="cmd-item-icon">🏠</div><div class="cmd-item-name">Overview</div><div class="cmd-item-hint">Page</div></div>
+      <div class="cmd-item" onclick="cmdNav('tasks')"><div class="cmd-item-icon">✅</div><div class="cmd-item-name">Tasks</div><div class="cmd-item-hint">Page</div></div>
+      <div class="cmd-item" onclick="cmdNav('focus')"><div class="cmd-item-icon">🎯</div><div class="cmd-item-name">Focus workspace</div><div class="cmd-item-hint">Page</div></div>
+      <div class="cmd-item" onclick="cmdNav('habits')"><div class="cmd-item-icon">🔥</div><div class="cmd-item-name">Habits tracker</div><div class="cmd-item-hint">Page</div></div>
+      <div class="cmd-item" onclick="cmdNav('academics')"><div class="cmd-item-icon">⚛</div><div class="cmd-item-name">Academics</div><div class="cmd-item-hint">Page</div></div>
+      <div class="cmd-item" onclick="cmdNav('projects')"><div class="cmd-item-icon">🚀</div><div class="cmd-item-name">Projects</div><div class="cmd-item-hint">Page</div></div>
+      <div class="cmd-item" onclick="cmdNav('analytics')"><div class="cmd-item-icon">📊</div><div class="cmd-item-name">Analytics</div><div class="cmd-item-hint">Page</div></div>
+      <div class="cmd-section">Actions</div>
+      <div class="cmd-item" onclick="closeCmd();nav('tasks',document.querySelectorAll('.nav-item')[1]);setTimeout(focusAdd,100)"><div class="cmd-item-icon">➕</div><div class="cmd-item-name">Add new task</div><div class="cmd-item-hint">⌘N</div></div>
+      <div class="cmd-item" onclick="closeCmd();nav('focus',document.querySelectorAll('.nav-item')[2]);setTimeout(()=>document.getElementById('t-start-btn').click(),200)"><div class="cmd-item-icon">⏱</div><div class="cmd-item-name">Start focus timer</div><div class="cmd-item-hint"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NOTIF PANEL ══ -->
+<div class="notif-panel" id="notif-panel">
+  <div class="notif-hd"><span>Notifications</span><span class="notif-clear" onclick="clearNotifs()">Clear all</span></div>
+  <div id="notif-list">
+    <div class="notif-item"><div class="notif-dot-type" style="background:var(--accent)"></div><div><div class="notif-body">Physics mock test scheduled for Friday</div><div class="notif-time">2h ago</div></div></div>
+    <div class="notif-item"><div class="notif-dot-type" style="background:var(--amber)"></div><div><div class="notif-body">GRYDX: 3 open issues on GitHub</div><div class="notif-time">5h ago</div></div></div>
+    <div class="notif-item"><div class="notif-dot-type" style="background:var(--green)"></div><div><div class="notif-body">Habit streak: 7 days! Keep it up 🔥</div><div class="notif-time">Yesterday</div></div></div>
+  </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+// ═══════════════════════════════════════════
+// MD OS — CORE JAVASCRIPT
+// ═══════════════════════════════════════════
+
+// ── CLOCK & GREETING
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('live-clock').textContent = `${h}:${m}:${s}`;
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('topbar-date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+  const hr = now.getHours();
+  const greet = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
+  document.getElementById('topbar-greeting').innerHTML = `${greet}, <span>Rohan</span> 👋`;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ── NAVIGATION
+function nav(id, el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById('page-'+id);
+  if (pg) pg.classList.add('active');
+  if (id === 'analytics') drawCharts();
+  if (id === 'habits') drawHabitChart();
+}
+
+// ── TASK CHECKS
+function toggleChk(el) {
+  el.classList.toggle('done');
+  const txt = el.nextElementSibling;
+  if (txt) txt.classList.toggle('done');
+}
+
+// ── ADD TASK (kanban)
+function addTask() {
+  const inp = document.getElementById('new-task-inp');
+  const val = inp.value.trim(); if (!val) return;
+  const cat = document.getElementById('ntcat').value;
+  const tagMap = {Physics:'<span class="tag tp">Physics</span>',Maths:'<span class="tag tb">Maths</span>',Economics:'<span class="tag ta">Econ</span>',Accounts:'<span class="tag tt">Acc</span>',Project:'<span class="tag tt">Project</span>',Other:'<span class="tag tp">Other</span>'};
+  const card = document.createElement('div');
+  card.className = 'k-card'; card.draggable = true;
+  card.setAttribute('ondragstart','dragStart(this,"todo")');
+  card.setAttribute('ondragover','event.preventDefault()');
+  card.setAttribute('ondrop','dropOnCard(event,this,"todo")');
+  card.innerHTML = `<div class="k-card-prog"><div class="k-card-prog-fill" style="width:0%"></div></div><div class="k-card-title">${val}</div><div class="k-card-foot">${tagMap[cat]||tagMap.Other}<span class="k-card-date">Today</span></div>`;
+  document.getElementById('kcol-todo').prepend(card);
+  const c = document.getElementById('kc-todo');
+  c.textContent = parseInt(c.textContent)+1;
+  document.getElementById('nav-task-count').textContent = (parseInt(document.getElementById('nav-task-count').textContent)||0)+1;
+  inp.value = '';
+}
+function focusAdd() { document.getElementById('new-task-inp').focus(); }
+
+// ── DRAG & DROP KANBAN
+let draggedCard = null, dragSrc = null;
+function dragStart(el, col) { draggedCard = el; dragSrc = col; el.classList.add('dragging'); }
+function dragOver(col) { col.classList.add('drag-over'); }
+function drop(e, colId) {
+  e.preventDefault();
+  if (!draggedCard) return;
+  draggedCard.classList.remove('dragging');
+  document.querySelectorAll('.k-col').forEach(c=>c.classList.remove('drag-over'));
+  const target = document.getElementById('kcol-'+colId);
+  if (target && dragSrc !== colId) {
+    target.appendChild(draggedCard);
+    if (colId === 'done') draggedCard.classList.add('k-card-done'); else draggedCard.classList.remove('k-card-done');
+    draggedCard.setAttribute('ondragstart',`dragStart(this,'${colId}')`);
+    draggedCard.setAttribute('ondrop',`dropOnCard(event,this,'${colId}')`);
+    updateKCounts();
+  }
+  draggedCard = null;
+}
+function dropOnCard(e, el, colId) { e.preventDefault(); e.stopPropagation(); drop(e, colId); }
+function updateKCounts() {
+  ['todo','prog','done'].forEach(id => {
+    document.getElementById('kc-'+id).textContent = document.getElementById('kcol-'+id).children.length;
+  });
+}
+
+// ── TOPIC CYCLE
+function cycleTopic(el) {
+  const b = el.querySelector('.ts');
+  if (b.classList.contains('ts-todo')) { b.className='ts ts-prog'; b.textContent='In progress'; }
+  else if (b.classList.contains('ts-prog')) { b.className='ts ts-done'; b.textContent='Done'; }
+  else { b.className='ts ts-todo'; b.textContent='To do'; }
+}
+
+// ── NOTES (localStorage)
+let activeNote = 'physics';
+const noteDefaults = {
+  physics: 'Physics — Kinematics\n\nv = u + at\ns = ut + ½at²\nv² = u² + 2as\n\nKey: displacement-time slope = velocity\nVelocity-time slope = acceleration\n\nNote: projectile motion → treat x and y independently.',
+  maths: 'Mathematics — Quadratics\n\nax² + bx + c = 0\nQuadratic formula: x = (-b ± √(b²-4ac)) / 2a\n\nDiscriminant Δ = b²-4ac\n  Δ > 0 → two distinct real roots\n  Δ = 0 → one repeated root\n  Δ < 0 → no real roots (complex)\n\nCompleting the square: a(x+h)² + k',
+  econ: 'Economics — Macroeconomy\n\nAD = C + I + G + (X - M)\n\nInflation types:\n  Demand-pull → excess AD\n  Cost-push   → supply shock\n\nPhillips curve: inflation ↔ unemployment trade-off\nQuantity theory: MV = PT',
+  accounts: 'Accounts — Financial Statements\n\nIncome Statement: Revenue − COGS = Gross Profit\nGross Profit − Expenses = Net Profit\n\nBalance Sheet: Assets = Liabilities + Equity\n\nKey ratios:\n  Gross margin = GP/Revenue × 100\n  Current ratio = Current Assets / Current Liabilities',
+  grydx: 'GRYDX — Dev Notes\n\nBloomberg API: Check authentication header\nError scanner: regex pattern for formula syntax\nPriority: fix volatility score on multi-stock model\n\nTODO:\n  [ ] Bloomberg API auth fix\n  [ ] Add batch processing for 50+ tickers\n  [ ] Formula generation v2',
+  general: ''
+};
+function loadNote(tab) {
+  const saved = localStorage.getItem('mddos_note_'+tab);
+  document.getElementById('note-area').value = saved !== null ? saved : (noteDefaults[tab] || '');
+  updateNoteMeta();
+}
+function saveNote() {
+  const val = document.getElementById('note-area').value;
+  localStorage.setItem('mddos_note_'+activeNote, val);
+  document.getElementById('note-saved-indicator').textContent = '✓ Saved';
+  setTimeout(()=>document.getElementById('note-saved-indicator').textContent='', 2000);
+}
+function clearNote() { document.getElementById('note-area').value=''; updateNoteMeta(); }
+function updateNoteMeta() {
+  const v = document.getElementById('note-area').value;
+  document.getElementById('note-meta').textContent = `${v.length} chars · ${v.split('\n').length} lines`;
+}
+function switchNote(tab, el) {
+  saveNote();
+  activeNote = tab;
+  document.querySelectorAll('.note-tab').forEach(t=>t.classList.remove('active-tab'));
+  if(el) el.classList.add('active-tab');
+  loadNote(tab);
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  loadNote('physics');
+  document.getElementById('note-area').addEventListener('input', updateNoteMeta);
+});
+// auto-save every 30s
+setInterval(()=>{ if(document.getElementById('note-area')) saveNote(); }, 30000);
+
+// ── POMODORO TIMER
+let timerTotal=25*60,timerLeft=25*60,timerOn=false,timerInt=null,timerMode='focus';
+function updateTimerUI() {
+  const m=Math.floor(timerLeft/60),s=timerLeft%60;
+  document.getElementById('timer-disp').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  const pct=timerLeft/timerTotal;
+  document.getElementById('timer-pbar').style.width=Math.round(pct*100)+'%';
+  const circ=377;
+  document.getElementById('ring-circle').setAttribute('stroke-dashoffset',Math.round(circ*(1-pct)));
+}
+function setTimerMode(mode,mins,btn) {
+  document.querySelectorAll('.t-mode-btn').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  timerMode=mode; timerTotal=mins*60; timerLeft=mins*60;
+  clearInterval(timerInt); timerOn=false;
+  document.getElementById('t-start-btn').textContent='▶ Start';
+  document.getElementById('timer-mode-lbl').textContent=mode==='focus'?'Focus':mode==='deep'?'Deep work':'Break';
+  document.getElementById('ring-circle').setAttribute('stroke','var('+(mode==='focus'?'--accent':mode==='deep'?'--blue':'--green')+')');
+  updateTimerUI();
+}
+function toggleTimer() {
+  if(timerOn) {
+    clearInterval(timerInt); timerOn=false;
+    document.getElementById('t-start-btn').textContent='▶ Resume';
+  } else {
+    timerOn=true; document.getElementById('t-start-btn').textContent='⏸ Pause';
+    timerInt=setInterval(()=>{
+      if(timerLeft<=0){
+        clearInterval(timerInt); timerOn=false;
+        document.getElementById('t-start-btn').textContent='▶ Start';
+        logSession();
+        return;
+      }
+      timerLeft--; updateTimerUI();
+    },1000);
+  }
+}
+function resetTimer() { clearInterval(timerInt); timerOn=false; timerLeft=timerTotal; document.getElementById('t-start-btn').textContent='▶ Start'; updateTimerUI(); }
+function logSession() {
+  const log = document.getElementById('sessions-log');
+  const mins = Math.round(timerTotal/60);
+  const colors = {focus:'var(--accent)',deep:'var(--blue)',short:'var(--green)',long:'var(--teal)'};
+  const now = new Date(); const h=String(now.getHours()).padStart(2,'0'); const m=String(now.getMinutes()).padStart(2,'0');
+  const item = document.createElement('div');
+  item.className='session-item';
+  item.innerHTML=`<div class="session-dot" style="background:${colors[timerMode]||'var(--accent)'}"></div><div class="session-desc">${timerMode==='focus'?'Focus session':timerMode==='deep'?'Deep work':'Break'}</div><div class="session-time">${h}:${m} · ${mins}m</div>`;
+  log.prepend(item);
+}
+
+// ── HABITS
+function buildHabitDots(containerId, doneCount) {
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  el.innerHTML='';
+  for(let i=0;i<7;i++){
+    const d=document.createElement('div');
+    d.className='h-dot'+(i<doneCount?' done':'');
+    d.onclick=function(){this.classList.toggle('done')};
+    el.appendChild(d);
+  }
+}
+['hw-dots','rr-dots','ex-dots'].forEach((id,i)=>buildHabitDots(id,[7,5,3][i]));
+['hd-dw','hd-rd','hd-ex','hd-rv','hd-cd'].forEach((id,i)=>buildHabitDots(id,[7,5,3,6,7][i]));
+function buildHeatmap() {
+  const grid=document.getElementById('heatmap'); if(!grid) return;
+  grid.innerHTML='';
+  for(let i=0;i<182;i++){
+    const cell=document.createElement('div');
+    const r=Math.random();
+    cell.className='hm-cell'+(r>0.7?' hm-l4':r>0.5?' hm-l3':r>0.3?' hm-l2':r>0.15?' hm-l1':'');
+    cell.title=`${Math.floor(Math.random()*6)} habits`;
+    grid.appendChild(cell);
+  }
+}
+buildHeatmap();
+
+// ── COMMAND PALETTE
+function openCmd() { document.getElementById('cmd-overlay').classList.add('open'); setTimeout(()=>document.getElementById('cmd-inp').focus(),50); }
+function closeCmd() { document.getElementById('cmd-overlay').classList.remove('open'); document.getElementById('cmd-inp').value=''; }
+function cmdNav(id) { closeCmd(); const items=document.querySelectorAll('.nav-item'); const map={overview:0,tasks:1,focus:2,habits:3,academics:4,projects:5,analytics:6}; nav(id,items[map[id]||0]); }
+function filterCmd(v) {
+  document.querySelectorAll('.cmd-item').forEach(item=>{
+    item.style.display = !v || item.querySelector('.cmd-item-name').textContent.toLowerCase().includes(v.toLowerCase()) ? '' : 'none';
+  });
+}
+function cmdKey(e) { if(e.key==='Escape') closeCmd(); }
+document.addEventListener('keydown',e=>{ if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openCmd();} });
+
+// ── NOTIFICATIONS
+function toggleNotif() { document.getElementById('notif-panel').classList.toggle('open'); }
+function clearNotifs() { document.getElementById('notif-list').innerHTML='<div class="notif-empty">No notifications</div>'; }
+document.addEventListener('click',e=>{ if(!e.target.closest('#notif-panel')&&!e.target.closest('.icn-btn')) document.getElementById('notif-panel').classList.remove('open'); });
+
+// ── CHARTS
+function drawCharts(){
+  if(window._chartsDrawn) return; window._chartsDrawn=true;
+  const defs={responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#55546A',font:{size:10,family:'DM Mono'}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#55546A',font:{size:10,family:'DM Mono'}}}}};
+  const days=['Apr 22','Apr 23','Apr 24','Apr 25','Apr 26','Apr 27','Apr 28','Apr 29','Apr 30','May 1','May 2','May 3','May 4','May 5'];
+  new Chart(document.getElementById('focus-chart'),{type:'bar',data:{labels:days,datasets:[{data:[2.5,3,1.5,4,2,0,3.5,4.2,2.8,3.1,1.9,4.5,3.8,2.5],backgroundColor:'rgba(123,110,223,0.4)',borderColor:'rgba(123,110,223,0.8)',borderWidth:1,borderRadius:4}]},options:{...defs,plugins:{...defs.plugins}}});
+  new Chart(document.getElementById('tasks-chart'),{type:'doughnut',data:{labels:['Physics','Maths','Economics','Accounts','Projects'],datasets:[{data:[14,22,11,8,18],backgroundColor:['rgba(123,110,223,0.7)','rgba(96,165,250,0.7)','rgba(242,162,51,0.7)','rgba(34,211,200,0.7)','rgba(62,207,142,0.7)'],borderWidth:0}]},options:{responsive:true,plugins:{legend:{display:true,position:'right',labels:{color:'#9896A8',font:{size:10,family:'DM Mono'},boxWidth:10}}}}});
+  const wks=['W1','W2','W3','W4','W5'];
+  new Chart(document.getElementById('prod-chart'),{type:'line',data:{labels:wks,datasets:[{data:[62,74,55,88,79],borderColor:'var(--accent)',backgroundColor:'rgba(123,110,223,0.1)',borderWidth:2,fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'var(--accent)'}]},options:{...defs}});
+  new Chart(document.getElementById('pie-chart'),{type:'polarArea',data:{labels:['Physics','Maths','Econ','Accounts','Projects'],datasets:[{data:[18,24,12,8,20],backgroundColor:['rgba(123,110,223,0.55)','rgba(96,165,250,0.55)','rgba(242,162,51,0.55)','rgba(34,211,200,0.55)','rgba(62,207,142,0.55)'],borderWidth:0}]},options:{responsive:true,plugins:{legend:{display:true,position:'bottom',labels:{color:'#9896A8',font:{size:10},boxWidth:10}}}}});
+}
+function drawHabitChart(){
+  if(window._habitChartDrawn) return; window._habitChartDrawn=true;
+  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  new Chart(document.getElementById('habit-chart'),{type:'bar',data:{labels:days,datasets:[
+    {label:'Completed',data:[5,6,4,6,5,3,6],backgroundColor:'rgba(123,110,223,0.5)',borderColor:'rgba(123,110,223,0.9)',borderWidth:1,borderRadius:3},
+    {label:'Target',data:[6,6,6,6,6,6,6],backgroundColor:'rgba(255,255,255,0.05)',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,borderRadius:3},
+  ]},options:{responsive:true,plugins:{legend:{display:true,labels:{color:'#9896A8',font:{size:10},boxWidth:10}}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#55546A',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#55546A',font:{size:10}},max:6}}}});
+}
+
+// Init note after DOM ready
+window.addEventListener('load', () => { loadNote('physics'); });
+</script>
+</body>
+</html>
