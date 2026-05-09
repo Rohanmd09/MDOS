@@ -11,40 +11,40 @@
    MD OS — DESIGN SYSTEM
 ═══════════════════════════════════════════ */
 :root {
-  --bg:      #0A0A0D;
-  --bg2:     #111115;
-  --bg3:     #18181E;
-  --bg4:     #202028;
-  --bg5:     #28282F;
-  --bg6:     #32323C;
-  --border:  rgba(255,255,255,0.06);
-  --border2: rgba(255,255,255,0.11);
-  --border3: rgba(255,255,255,0.18);
-  --text:    #EEEDF4;
-  --text2:   #9896A8;
-  --text3:   #55546A;
-  --text4:   #36354A;
-  --accent:  #7B6EDF;
-  --accent2: #A49CFF;
-  --acc-glow:rgba(123,110,223,0.18);
-  --amber:   #F2A233;
+  --bg:      #0D0D12;
+  --bg2:     #13131A;
+  --bg3:     #1A1A24;
+  --bg4:     #22222E;
+  --bg5:     #2A2A38;
+  --bg6:     #34344A;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --border3: rgba(255,255,255,0.22);
+  --text:    #F2F1FA;
+  --text2:   #9A98B0;
+  --text3:   #58567A;
+  --text4:   #383660;
+  --accent:  #7C6EE0;
+  --accent2: #A89FFF;
+  --acc-glow:rgba(124,110,224,0.22);
+  --amber:   #F5A623;
   --amber-d: #C47A10;
-  --amb-bg:  rgba(242,162,51,0.11);
-  --green:   #3ECF8E;
-  --grn-bg:  rgba(62,207,142,0.10);
-  --red:     #F16C6C;
-  --red-bg:  rgba(241,108,108,0.10);
-  --teal:    #22D3C8;
-  --teal-bg: rgba(34,211,200,0.09);
-  --blue:    #60A5FA;
-  --blue-bg: rgba(96,165,250,0.10);
+  --amb-bg:  rgba(245,166,35,0.13);
+  --green:   #36D896;
+  --grn-bg:  rgba(54,216,150,0.12);
+  --red:     #F06060;
+  --red-bg:  rgba(240,96,96,0.12);
+  --teal:    #18D8CC;
+  --teal-bg: rgba(24,216,204,0.11);
+  --blue:    #5BA4F5;
+  --blue-bg: rgba(91,164,245,0.12);
   --pink:    #F472B6;
-  --pink-bg: rgba(244,114,182,0.10);
-  --r: 12px; --rsm: 7px; --rlg: 16px;
+  --pink-bg: rgba(244,114,182,0.12);
+  --r: 14px; --rsm: 8px; --rlg: 18px;
   --font: 'DM Sans', sans-serif;
   --mono: 'DM Mono', monospace;
-  --sidebar-w: 216px;
-  --topbar-h: 52px;
+  --sidebar-w: 220px;
+  --topbar-h: 54px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--font);color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased}
@@ -65,13 +65,14 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--fon
   background:var(--bg2);border-right:1px solid var(--border);
   display:flex;flex-direction:column;
   position:relative;z-index:20;overflow:hidden;
+  box-shadow:2px 0 24px rgba(0,0,0,0.3);
 }
 .sidebar-inner{display:flex;flex-direction:column;height:100%;padding:16px 0}
 
 .logo-wrap{padding:0 14px 20px;display:flex;align-items:center;gap:9px}
 .logo-gem{
-  width:28px;height:28px;border-radius:7px;
-  background:linear-gradient(135deg,#7B6EDF,#A49CFF);
+  width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(135deg,#6C5FD4 0%,#A89FFF 100%);
   display:flex;align-items:center;justify-content:center;
   font-size:13px;font-weight:700;color:white;
   box-shadow:0 0 20px rgba(123,110,223,0.35);
@@ -92,7 +93,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--fon
   transition:all 0.12s;user-select:none;position:relative;
 }
 .nav-item:hover{color:var(--text);background:rgba(255,255,255,0.03)}
-.nav-item.active{color:var(--accent2);background:rgba(123,110,223,0.09);border-left-color:var(--accent);font-weight:500}
+.nav-item.active{color:var(--accent2);background:linear-gradient(90deg,rgba(124,110,224,0.15),rgba(124,110,224,0.04));border-left-color:var(--accent);font-weight:500}
 .nav-item svg{width:14px;height:14px;flex-shrink:0;opacity:0.65}
 .nav-item.active svg{opacity:1}
 .nav-badge{
@@ -122,6 +123,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--fon
   padding:0 20px;height:var(--topbar-h);
   background:var(--bg2);border-bottom:1px solid var(--border);
   flex-shrink:0;
+  box-shadow:0 1px 20px rgba(0,0,0,0.25);
 }
 .topbar-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
 .topbar-greeting{font-size:13.5px;font-weight:500;letter-spacing:-0.2px;white-space:nowrap}
@@ -171,7 +173,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--fon
 /* ══════════════════════════
    CARDS & LAYOUT PRIMITIVES
 ══════════════════════════ */
-.card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r)}
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);transition:border-color 0.15s}
 .card:hover{border-color:rgba(255,255,255,0.09)}
 .card-hd{display:flex;align-items:center;justify-content:space-between;padding:13px 15px 0}
 .card-title{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.08em}
@@ -184,13 +186,13 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--fon
 .g21{display:grid;grid-template-columns:1fr 340px;gap:12px;margin-bottom:14px}
 
 /* metrics */
-.metric{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px;transition:border-color 0.15s}
-.metric:hover{border-color:var(--border2)}
+.metric{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:all 0.15s;position:relative;overflow:hidden}
+.metric:hover{border-color:var(--border2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
 .metric-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
 .metric-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .metric-icon svg{width:15px;height:15px}
 .badge{font-size:9.5px;padding:2px 7px;border-radius:20px;font-weight:500;font-family:var(--mono)}
-.metric-val{font-size:24px;font-weight:600;letter-spacing:-0.5px;line-height:1;margin-bottom:2px}
+.metric-val{font-size:26px;font-weight:700;letter-spacing:-1px;line-height:1;margin-bottom:3px}
 .metric-lbl{font-size:11px;color:var(--text3)}
 
 /* prog */
@@ -235,11 +237,11 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--fon
 .k-add:hover{background:var(--accent);color:white}
 .k-body{padding:10px;display:flex;flex-direction:column;gap:7px;min-height:80px}
 .k-card{
-  background:var(--bg4);border:1px solid var(--border);border-radius:9px;
-  padding:11px 12px;cursor:grab;transition:all 0.15s;
+  background:var(--bg4);border:1px solid var(--border);border-radius:10px;
+  padding:12px 13px;cursor:grab;transition:all 0.15s;
   position:relative;
 }
-.k-card:hover{border-color:var(--border2);background:var(--bg5)}
+.k-card:hover{border-color:var(--border2);background:var(--bg5);box-shadow:0 4px 16px rgba(0,0,0,0.2);transform:translateY(-1px)}
 .k-card.dragging{opacity:0.4;cursor:grabbing}
 .k-card.drag-over{border-color:var(--accent);box-shadow:0 0 0 2px rgba(123,110,223,0.2)}
 .k-card-prog{height:2px;background:var(--bg6);border-radius:1px;margin-bottom:7px;overflow:hidden}
@@ -601,104 +603,93 @@ code{font-family:var(--mono);background:var(--bg5);padding:1px 5px;border-radius
       <!-- ══ OVERVIEW ══ -->
       <div class="page active" id="page-overview">
         <div class="g4">
-          <div class="metric">
+          <div class="metric" style="background:linear-gradient(135deg,rgba(124,110,224,0.18) 0%,var(--bg3) 60%)">
             <div class="metric-top">
-              <div class="metric-icon" style="background:rgba(123,110,223,0.12)"><svg viewBox="0 0 16 16" fill="none" stroke="#A49CFF" stroke-width="1.5"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M5 8l2 2 4-4"/></svg></div>
-              <span class="badge" style="background:var(--grn-bg);color:var(--green)">+2 today</span>
+              <div class="metric-icon" style="background:rgba(124,110,224,0.2);border-radius:10px"><svg viewBox="0 0 16 16" fill="none" stroke="#A89FFF" stroke-width="1.5"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M5 8l2 2 4-4"/></svg></div>
+              <span class="badge" style="background:var(--grn-bg);color:var(--green)" id="m-done-badge">+0 today</span>
             </div>
-            <div class="metric-val">18</div>
+            <div class="metric-val" id="m-done">0</div>
             <div class="metric-lbl">Tasks completed</div>
+            <div style="position:absolute;bottom:0;right:0;width:60px;height:60px;background:radial-gradient(circle,rgba(124,110,224,0.12),transparent 70%);pointer-events:none"></div>
           </div>
-          <div class="metric">
+          <div class="metric" style="background:linear-gradient(135deg,rgba(245,166,35,0.14) 0%,var(--bg3) 60%)">
             <div class="metric-top">
-              <div class="metric-icon" style="background:var(--amb-bg)"><svg viewBox="0 0 16 16" fill="none" stroke="#F2A233" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M8 4v4l3 2"/></svg></div>
-              <span class="badge" style="background:var(--amb-bg);color:var(--amber)">Active</span>
+              <div class="metric-icon" style="background:var(--amb-bg);border-radius:10px"><svg viewBox="0 0 16 16" fill="none" stroke="#F5A623" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M8 4v4l3 2"/></svg></div>
+              <span class="badge" style="background:var(--amb-bg);color:var(--amber)" id="m-prog-badge">Active</span>
             </div>
-            <div class="metric-val">5</div>
+            <div class="metric-val" id="m-prog">0</div>
             <div class="metric-lbl">In progress</div>
+            <div style="position:absolute;bottom:0;right:0;width:60px;height:60px;background:radial-gradient(circle,rgba(245,166,35,0.10),transparent 70%);pointer-events:none"></div>
           </div>
-          <div class="metric">
+          <div class="metric" style="background:linear-gradient(135deg,rgba(24,216,204,0.13) 0%,var(--bg3) 60%)">
             <div class="metric-top">
-              <div class="metric-icon" style="background:var(--teal-bg)"><svg viewBox="0 0 16 16" fill="none" stroke="#22D3C8" stroke-width="1.5"><path d="M8 1L15 5v3c0 3.5-3 6-7 7C4 14 1 11.5 1 8V5l7-4z"/></svg></div>
-              <span class="badge" style="background:var(--teal-bg);color:var(--teal)">AS Level</span>
+              <div class="metric-icon" style="background:var(--teal-bg);border-radius:10px"><svg viewBox="0 0 16 16" fill="none" stroke="#18D8CC" stroke-width="1.5"><path d="M8 1L15 5v3c0 3.5-3 6-7 7C4 14 1 11.5 1 8V5l7-4z"/></svg></div>
+              <span class="badge" style="background:var(--teal-bg);color:var(--teal)">Cambridge</span>
             </div>
-            <div class="metric-val">11</div>
+            <div class="metric-val" id="m-topics">0</div>
             <div class="metric-lbl">Topics covered</div>
+            <div style="position:absolute;bottom:0;right:0;width:60px;height:60px;background:radial-gradient(circle,rgba(24,216,204,0.10),transparent 70%);pointer-events:none"></div>
           </div>
-          <div class="metric">
+          <div class="metric" style="background:linear-gradient(135deg,rgba(245,166,35,0.14) 0%,var(--bg3) 60%)">
             <div class="metric-top">
-              <div class="metric-icon" style="background:var(--amb-bg)"><svg viewBox="0 0 16 16" fill="none" stroke="#F2A233" stroke-width="1.5"><path d="M8 2c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6 2.7-6 6-6z"/><path d="M8 2v1M8 13v1M2 8h1M13 8h1"/></svg></div>
-              <span class="badge" style="background:var(--amb-bg);color:var(--amber)">🔥 Streak</span>
+              <div class="metric-icon" style="background:var(--amb-bg);border-radius:10px"><svg viewBox="0 0 16 16" fill="none" stroke="#F5A623" stroke-width="1.5"><path d="M8 2c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6 2.7-6 6-6z"/><path d="M8 5v3l2 2"/></svg></div>
+              <span class="badge" style="background:var(--amb-bg);color:var(--amber)" id="m-streak-badge">🔥 Streak</span>
             </div>
-            <div class="metric-val">7d</div>
+            <div class="metric-val" id="m-streak">0d</div>
             <div class="metric-lbl">Focus streak</div>
+            <div style="position:absolute;bottom:0;right:0;width:60px;height:60px;background:radial-gradient(circle,rgba(245,166,35,0.10),transparent 70%);pointer-events:none"></div>
           </div>
         </div>
-
         <div class="g21">
           <div>
             <div class="card" style="margin-bottom:12px">
-              <div class="card-hd"><span class="card-title">Priority tasks</span><span class="card-action" onclick="nav('tasks',document.querySelectorAll('.nav-item')[1])">View all →</span></div>
-              <div class="card-body" id="ov-task-list">
-                <div class="task-row"><div class="pri-dot" style="background:var(--red)"></div><div class="chk" onclick="toggleChk(this)"></div><div class="task-txt">Review Kinematics notes for mock test</div><span class="tag tp">Physics</span></div>
-                <div class="task-row"><div class="pri-dot" style="background:var(--red)"></div><div class="chk done" onclick="toggleChk(this)"></div><div class="task-txt done">Quadratics problem set — P1</div><span class="tag tb">Maths</span></div>
-                
-                <div class="task-row"><div class="pri-dot" style="background:var(--amber)"></div><div class="chk done" onclick="toggleChk(this)"></div><div class="task-txt done">Read Macroeconomics section 4</div><span class="tag ta">Econ</span></div>
-                <div class="task-row"><div class="pri-dot" style="background:var(--green)"></div><div class="chk" onclick="toggleChk(this)"></div><div class="task-txt">Update GLOBALDESK IMF API feed</div><span class="tag tt">Project</span></div>
+              <div class="card-hd">
+                <span class="card-title">Priority tasks</span>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:10px;color:var(--text3);font-family:var(--mono)" id="ov-task-meta">0 / 0</span>
+                  <span class="card-action" onclick="nav('tasks',document.querySelectorAll('.nav-item')[1])">View all →</span>
+                </div>
               </div>
+              <div class="card-body" id="ov-task-list">
+                <!-- Rendered by JS from localStorage -->
+              </div>
+              <div style="padding:10px 15px;border-top:1px solid var(--border);display:flex;gap:6px">
+                <input class="finput" id="ov-quick-inp" placeholder="Quick add task..." style="flex:1;font-size:12px;padding:6px 10px" onkeydown="if(event.key==='Enter')ovQuickAdd()"/>
+                <select class="fselect" id="ov-quick-cat" style="font-size:11px;padding:6px 8px">
+                  <option>Physics</option><option>Maths</option><option>Economics</option><option>Accounts</option><option>English</option><option>Other</option>
+                </select>
+                <button class="btn-primary" style="font-size:11px;padding:6px 12px" onclick="ovQuickAdd()">+ Add</button>
+              </div></div>
             </div>
             <div class="g2" style="margin-bottom:0">
               <div class="card">
                 <div class="card-hd"><span class="card-title">Academic progress</span></div>
-                <div class="card-body">
-                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Physics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">5/11</span></div><div class="pbar"><div class="pfill" style="width:45%;background:var(--accent)"></div></div></div>
-                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Mathematics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">3/12</span></div><div class="pbar"><div class="pfill" style="width:25%;background:var(--blue)"></div></div></div>
-                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Economics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">2/6</span></div><div class="pbar"><div class="pfill" style="width:33%;background:var(--amber)"></div></div></div>
-                  <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Accounts</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">1/8</span></div><div class="pbar"><div class="pfill" style="width:12%;background:var(--teal)"></div></div></div>
+                <div class="card-body" id="ov-acad-progress">
+                  <!-- Rendered by JS from topic states -->
+                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Physics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)" id="ap-physics-lbl">0/25</span></div><div class="pbar"><div class="pfill" id="ap-physics" style="width:0%;background:var(--accent)"></div></div></div>
+                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Mathematics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)" id="ap-maths-lbl">0/32</span></div><div class="pbar"><div class="pfill" id="ap-maths" style="width:0%;background:var(--blue)"></div></div></div>
+                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Economics</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)" id="ap-econ-lbl">0/15</span></div><div class="pbar"><div class="pfill" id="ap-econ" style="width:0%;background:var(--amber)"></div></div></div>
+                  <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">Accounts</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)" id="ap-accounts-lbl">0/10</span></div><div class="pbar"><div class="pfill" id="ap-accounts" style="width:0%;background:var(--teal)"></div></div></div>
+                  <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;color:var(--text2)">English</span><span style="font-size:10px;color:var(--text3);font-family:var(--mono)" id="ap-english-lbl">0/9</span></div><div class="pbar"><div class="pfill" id="ap-english" style="width:0%;background:var(--pink)"></div></div></div>
                 </div>
               </div>
               <div class="card">
-                <div class="card-hd"><span class="card-title">Today's schedule</span></div>
-                <div class="card-body">
-                  <div class="sched-item"><div class="sched-time">09:00</div><div class="sched-bar" style="background:var(--accent)"></div><div class="sched-body"><div class="sched-title">Physics — Kinematics revision</div><span class="tag tp" style="margin-top:3px;display:inline-block">Physics</span></div></div>
-                  <div class="sched-item"><div class="sched-time">11:30</div><div class="sched-bar" style="background:var(--teal)"></div><div class="sched-body"><div class="sched-title">GRYDX API debugging</div><span class="tag tt" style="margin-top:3px;display:inline-block">GRYDX</span></div></div>
-                  <div class="sched-item"><div class="sched-time">15:00</div><div class="sched-bar" style="background:var(--amber)"></div><div class="sched-body"><div class="sched-title">Economics — Macroeconomy</div><span class="tag ta" style="margin-top:3px;display:inline-block">Econ</span></div></div>
+                <div class="card-hd"><span class="card-title">Today's schedule</span><span class="card-action" onclick="addSchedItem()">+ Add</span></div>
+                <div class="card-body" id="sched-list">
+                  <!-- rendered by JS -->
                 </div>
               </div>
             </div>
           </div>
           <div>
             <div class="card" style="margin-bottom:12px">
-              <div class="card-hd"><span class="card-title">May 2025</span><div style="display:flex;gap:3px"><button class="btn-ghost" style="padding:3px 8px;font-size:12px">‹</button><button class="btn-ghost" style="padding:3px 8px;font-size:12px">›</button></div></div>
-              <div class="card-body cal-mini">
-                <div class="cal-grid">
-                  <div class="cday hdr">Su</div><div class="cday hdr">Mo</div><div class="cday hdr">Tu</div><div class="cday hdr">We</div><div class="cday hdr">Th</div><div class="cday hdr">Fr</div><div class="cday hdr">Sa</div>
-                  <div class="cday"></div><div class="cday"></div><div class="cday"></div><div class="cday num has-ev">1</div><div class="cday num has-ev">2</div><div class="cday num">3</div><div class="cday num">4</div>
-                  <div class="cday num today">5</div><div class="cday num has-ev">6</div><div class="cday num">7</div><div class="cday num has-ev">8</div><div class="cday num">9</div><div class="cday num">10</div><div class="cday num">11</div>
-                  <div class="cday num">12</div><div class="cday num has-ev">13</div><div class="cday num">14</div><div class="cday num has-ev">15</div><div class="cday num">16</div><div class="cday num">17</div><div class="cday num">18</div>
-                  <div class="cday num has-ev">19</div><div class="cday num">20</div><div class="cday num">21</div><div class="cday num">22</div><div class="cday num">23</div><div class="cday num">24</div><div class="cday num">25</div>
-                  <div class="cday num">26</div><div class="cday num">27</div><div class="cday num">28</div><div class="cday num">29</div><div class="cday num">30</div><div class="cday num">31</div>
-                </div>
-              </div>
+              <div class="card-hd"><span class="card-title" id="cal-title">May 2025</span><div style="display:flex;gap:3px"><button class="btn-ghost" style="padding:3px 8px;font-size:12px" onclick="calNav(-1)">‹</button><button class="btn-ghost" style="padding:3px 8px;font-size:12px" onclick="calNav(1)">›</button></div></div>
+              <div class="card-body cal-mini"><div class="cal-grid" id="cal-grid"></div></div>
             </div>
             <div class="card">
-              <div class="card-hd"><span class="card-title">Habit streak</span></div>
-              <div class="card-body">
-                <div class="habit-row">
-                  <div class="habit-name">Deep work (4h+)</div>
-                  <div class="habit-streak">7🔥</div>
-                  <div class="habit-dots" id="hw-dots"></div>
-                </div>
-                <div class="habit-row">
-                  <div class="habit-name">Read / research</div>
-                  <div class="habit-streak">5🔥</div>
-                  <div class="habit-dots" id="rr-dots"></div>
-                </div>
-                <div class="habit-row">
-                  <div class="habit-name">Exercise</div>
-                  <div class="habit-streak">3🔥</div>
-                  <div class="habit-dots" id="ex-dots"></div>
-                </div>
+              <div class="card-hd"><span class="card-title">Habit streak</span><span class="card-action" onclick="nav('habits',null,'habits')">View all →</span></div>
+              <div class="card-body" id="ov-habits-body">
+                <!-- rendered by JS -->
               </div>
             </div>
           </div>
@@ -718,25 +709,15 @@ code{font-family:var(--mono);background:var(--bg5);padding:1px 5px;border-radius
         <div class="kanban-wrap">
           <div class="k-col" ondragover="event.preventDefault();dragOver(this)" ondrop="drop(event,'todo')">
             <div class="k-col-hd"><div class="k-dot" style="background:var(--text3)"></div><div class="k-col-title">To do</div><div class="k-count" id="kc-todo">2</div><button class="k-add" onclick="focusAdd()">+</button></div>
-            <div class="k-body" id="kcol-todo">
-              <div class="k-card" draggable="true" ondragstart="dragStart(this,'todo')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'todo')"><div class="k-card-prog"><div class="k-card-prog-fill" style="width:0%"></div></div><div class="k-card-title">Review Kinematics notes for mock test</div><div class="k-card-foot"><span class="tag tp">Physics</span><span class="k-card-date">Due today</span></div></div>
-              
-              <div class="k-card" draggable="true" ondragstart="dragStart(this,'todo')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'todo')"><div class="k-card-prog"><div class="k-card-prog-fill" style="width:0%"></div></div><div class="k-card-title">Functions worksheet exercises</div><div class="k-card-foot"><span class="tag tb">Maths</span><span class="k-card-date">May 8</span></div></div>
-            </div>
+            <div class="k-body" id="kcol-todo"></div>
           </div>
           <div class="k-col" ondragover="event.preventDefault();dragOver(this)" ondrop="drop(event,'prog')">
             <div class="k-col-hd"><div class="k-dot" style="background:var(--amber)"></div><div class="k-col-title">In progress</div><div class="k-count" id="kc-prog">1</div></div>
-            <div class="k-body" id="kcol-prog">
-              
-              <div class="k-card" draggable="true" ondragstart="dragStart(this,'prog')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'prog')"><div class="k-card-prog"><div class="k-card-prog-fill" style="width:33%"></div></div><div class="k-card-title">Government Microeconomic Intervention notes</div><div class="k-card-foot"><span class="tag ta">Econ</span><span class="k-card-date">33%</span></div></div>
-            </div>
+            <div class="k-body" id="kcol-prog"></div>
           </div>
           <div class="k-col" ondragover="event.preventDefault();dragOver(this)" ondrop="drop(event,'done')">
             <div class="k-col-hd"><div class="k-dot" style="background:var(--green)"></div><div class="k-col-title">Done</div><div class="k-count" id="kc-done">2</div></div>
-            <div class="k-body" id="kcol-done">
-              <div class="k-card k-card-done" draggable="true" ondragstart="dragStart(this,'done')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'done')"><div class="k-card-title">Quadratics problem set — P1</div><div class="k-card-foot"><span class="tag tb">Maths</span><span class="k-card-date" style="color:var(--green)">✓ Done</span></div></div>
-              <div class="k-card k-card-done" draggable="true" ondragstart="dragStart(this,'done')" ondragover="event.preventDefault()" ondrop="dropOnCard(event,this,'done')"><div class="k-card-title">Read Macroeconomics section 4</div><div class="k-card-foot"><span class="tag ta">Econ</span><span class="k-card-date" style="color:var(--green)">✓ Done</span></div></div>
-            </div>
+            <div class="k-body" id="kcol-done"></div>
           </div>
         </div>
       </div>
@@ -860,14 +841,8 @@ code{font-family:var(--mono);background:var(--bg5);padding:1px 5px;border-radius
       <div class="page" id="page-habits">
         <div class="g2">
           <div class="card">
-            <div class="card-hd"><span class="card-title">Daily habits — today</span></div>
-            <div class="card-body">
-              <div class="habit-row"><div class="habit-name">Deep work session (4h+)</div><div class="habit-streak">7🔥</div><div class="habit-dots" id="hd-dw"></div></div>
-              <div class="habit-row"><div class="habit-name">Read / research 30min</div><div class="habit-streak">5🔥</div><div class="habit-dots" id="hd-rd"></div></div>
-              <div class="habit-row"><div class="habit-name">Exercise</div><div class="habit-streak">3🔥</div><div class="habit-dots" id="hd-ex"></div></div>
-              <div class="habit-row"><div class="habit-name">Review tomorrow's tasks</div><div class="habit-streak">6🔥</div><div class="habit-dots" id="hd-rv"></div></div>
-              <div class="habit-row"><div class="habit-name">Code / project work</div><div class="habit-streak">7🔥</div><div class="habit-dots" id="hd-cd"></div></div>
-            </div>
+            <div class="card-hd"><span class="card-title">Daily habits — today</span><span style="font-size:11px;color:var(--text3)">Click last dot to toggle today</span></div>
+            <div class="card-body" id="habits-full-list"><!-- rendered by JS --></div>
           </div>
           <div class="card">
             <div class="card-hd"><span class="card-title">Completion heatmap — last 6 months</span></div>
@@ -876,9 +851,9 @@ code{font-family:var(--mono);background:var(--bg5);padding:1px 5px;border-radius
               <div style="display:flex;align-items:center;gap:5px;margin-top:8px;justify-content:flex-end">
                 <span style="font-size:10px;color:var(--text3)">Less</span>
                 <div style="width:10px;height:10px;border-radius:2px;background:var(--bg5)"></div>
-                <div style="width:10px;height:10px;border-radius:2px;background:rgba(123,110,223,0.15)"></div>
-                <div style="width:10px;height:10px;border-radius:2px;background:rgba(123,110,223,0.35)"></div>
-                <div style="width:10px;height:10px;border-radius:2px;background:rgba(123,110,223,0.6)"></div>
+                <div style="width:10px;height:10px;border-radius:2px;background:rgba(124,110,224,0.15)"></div>
+                <div style="width:10px;height:10px;border-radius:2px;background:rgba(124,110,224,0.35)"></div>
+                <div style="width:10px;height:10px;border-radius:2px;background:rgba(124,110,224,0.6)"></div>
                 <div style="width:10px;height:10px;border-radius:2px;background:var(--accent)"></div>
                 <span style="font-size:10px;color:var(--text3)">More</span>
               </div>
@@ -887,9 +862,7 @@ code{font-family:var(--mono);background:var(--bg5);padding:1px 5px;border-radius
         </div>
         <div class="card">
           <div class="card-hd"><span class="card-title">Weekly habit completion</span></div>
-          <div class="card-body">
-            <canvas id="habit-chart" height="80"></canvas>
-          </div>
+          <div class="card-body"><canvas id="habit-chart" height="80"></canvas></div>
         </div>
       </div>
 
@@ -1128,254 +1101,553 @@ code{font-family:var(--mono);background:var(--bg5);padding:1px 5px;border-radius
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
 <script>
-// ═══════════════════════════════════════════
-// MD OS — CORE JAVASCRIPT
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════
+// MD OS — FULL PERSISTENCE ENGINE v4.1
+// ═══════════════════════════════════════
 
-// ── CLOCK & GREETING
-function updateClock() {
-  const now = new Date();
-  const h = String(now.getHours()).padStart(2,'0');
-  const m = String(now.getMinutes()).padStart(2,'0');
-  const s = String(now.getSeconds()).padStart(2,'0');
-  document.getElementById('live-clock').textContent = `${h}:${m}:${s}`;
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  document.getElementById('topbar-date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
-  const hr = now.getHours();
-  const greet = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
-  document.getElementById('topbar-greeting').innerHTML = `${greet}, <span>Rohan</span> 👋`;
+// ── localStorage helpers
+const LS = {
+  get:(k,d)=>{try{const v=localStorage.getItem('mddos_'+k);return v!==null?JSON.parse(v):d;}catch(e){return d;}},
+  set:(k,v)=>{try{localStorage.setItem('mddos_'+k,JSON.stringify(v));}catch(e){}}
+};
+
+// ── CLOCK
+function updateClock(){
+  const n=new Date(),p=x=>String(x).padStart(2,'0');
+  const cl=document.getElementById('live-clock');
+  if(cl) cl.textContent=`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const td=document.getElementById('topbar-date');
+  if(td) td.textContent=`${days[n.getDay()]}, ${n.getDate()} ${months[n.getMonth()]} ${n.getFullYear()}`;
+  const hr=n.getHours();
+  const g=hr<5?'Late night,':hr<12?'Good morning,':hr<17?'Good afternoon,':'Good evening,';
+  const tg=document.getElementById('topbar-greeting');
+  if(tg) tg.innerHTML=`${g} <span>Rohan</span> 👋`;
 }
-updateClock();
-setInterval(updateClock, 1000);
+updateClock(); setInterval(updateClock,1000);
 
 // ── NAVIGATION
-function nav(id, el) {
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  if (el) el.classList.add('active');
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const pg = document.getElementById('page-'+id);
-  if (pg) pg.classList.add('active');
-  if (id === 'analytics') drawCharts();
-  if (id === 'habits') drawHabitChart();
+// Map page id → nav item index (0-based among .nav-item elements)
+const PAGE_NAV_IDX = {overview:0,tasks:1,focus:2,habits:3,academics:4,projects:5,analytics:6};
+
+function nav(id, elOrNull, idFallback){
+  const pageId = id || idFallback;
+  // activate correct nav item
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(n=>n.classList.remove('active'));
+  const idx = PAGE_NAV_IDX[pageId];
+  if(idx !== undefined && navItems[idx]) navItems[idx].classList.add('active');
+  else if(elOrNull) elOrNull.classList.add('active');
+
+  // show correct page
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg = document.getElementById('page-'+pageId);
+  if(pg) pg.classList.add('active');
+
+  // page-specific inits
+  if(pageId==='analytics') drawCharts();
+  if(pageId==='habits'){ drawHabitChart(); buildHabitPage(); }
+  if(pageId==='overview') refreshOverview();
+
+  LS.set('lastPage', pageId);
 }
 
-// ── TASK CHECKS
-function toggleChk(el) {
-  el.classList.toggle('done');
-  const txt = el.nextElementSibling;
-  if (txt) txt.classList.toggle('done');
+// ═══════════════════════════════════════
+// TASKS — localStorage
+// ═══════════════════════════════════════
+let tasks = LS.get('tasks', [
+  {id:'t1',text:'Review Kinematics notes for mock test',cat:'Physics',pri:'h',col:'todo',created:Date.now()},
+  {id:'t2',text:'Quadratics problem set — P1',cat:'Maths',pri:'h',col:'done',created:Date.now()},
+  {id:'t3',text:'Read Macroeconomics section 4',cat:'Economics',pri:'m',col:'done',created:Date.now()},
+  {id:'t4',text:'Functions worksheet exercises',cat:'Maths',pri:'m',col:'todo',created:Date.now()},
+  {id:'t5',text:'Reconciliation & Verification notes',cat:'Accounts',pri:'l',col:'todo',created:Date.now()},
+]);
+function saveTasks(){ LS.set('tasks',tasks); }
+
+function taskTagHTML(cat){
+  const m={Physics:'<span class="tag tp">Physics</span>',Maths:'<span class="tag tb">Maths</span>',Economics:'<span class="tag ta">Econ</span>',Accounts:'<span class="tag tt">Acc</span>',English:'<span class="tag tpk">English</span>',Project:'<span class="tag tg">Project</span>',Other:'<span class="tag tp">Other</span>'};
+  return m[cat]||m.Other;
+}
+function priColor(p){ return p==='h'?'var(--red)':p==='m'?'var(--amber)':'var(--green)'; }
+
+function renderKanban(){
+  ['todo','prog','done'].forEach(col=>{
+    const el=document.getElementById('kcol-'+col); if(!el) return;
+    el.innerHTML='';
+    tasks.filter(t=>t.col===col).forEach(t=>{
+      const card=document.createElement('div');
+      card.className='k-card'+(col==='done'?' k-card-done':'');
+      card.draggable=true; card.dataset.id=t.id;
+      card.ondragstart=()=>dragStart(card,col);
+      card.ondragover=e=>e.preventDefault();
+      card.ondrop=e=>dropOnCard(e,card,col);
+      const pct=col==='done'?100:col==='prog'?50:0;
+      card.innerHTML=`<div class="k-card-prog"><div class="k-card-prog-fill" style="width:${pct}%"></div></div><div class="k-card-title">${t.text}</div><div class="k-card-foot">${taskTagHTML(t.cat)}<div style="display:flex;align-items:center;gap:6px"><div style="width:5px;height:5px;border-radius:50%;background:${priColor(t.pri)}"></div><button onclick="deleteTask('${t.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:0;line-height:1" title="Delete">×</button></div></div>`;
+      el.appendChild(card);
+    });
+    const cnt=document.getElementById('kc-'+col);
+    if(cnt) cnt.textContent=tasks.filter(t=>t.col===col).length;
+  });
+  updateNavBadge();
 }
 
-// ── ADD TASK (kanban)
-function addTask() {
-  const inp = document.getElementById('new-task-inp');
-  const val = inp.value.trim(); if (!val) return;
-  const cat = document.getElementById('ntcat').value;
-  const tagMap = {Physics:'<span class="tag tp">Physics</span>',Maths:'<span class="tag tb">Maths</span>',Economics:'<span class="tag ta">Econ</span>',Accounts:'<span class="tag tt">Acc</span>',Project:'<span class="tag tt">Project</span>',Other:'<span class="tag tp">Other</span>'};
-  const card = document.createElement('div');
-  card.className = 'k-card'; card.draggable = true;
-  card.setAttribute('ondragstart','dragStart(this,"todo")');
-  card.setAttribute('ondragover','event.preventDefault()');
-  card.setAttribute('ondrop','dropOnCard(event,this,"todo")');
-  card.innerHTML = `<div class="k-card-prog"><div class="k-card-prog-fill" style="width:0%"></div></div><div class="k-card-title">${val}</div><div class="k-card-foot">${tagMap[cat]||tagMap.Other}<span class="k-card-date">Today</span></div>`;
-  document.getElementById('kcol-todo').prepend(card);
-  const c = document.getElementById('kc-todo');
-  c.textContent = parseInt(c.textContent)+1;
-  document.getElementById('nav-task-count').textContent = (parseInt(document.getElementById('nav-task-count').textContent)||0)+1;
-  inp.value = '';
+function deleteTask(id){
+  tasks=tasks.filter(t=>t.id!==id); saveTasks(); renderKanban(); refreshOverview();
 }
-function focusAdd() { document.getElementById('new-task-inp').focus(); }
+function addTask(){
+  const inp=document.getElementById('new-task-inp');
+  const val=inp.value.trim(); if(!val) return;
+  tasks.unshift({id:'t'+Date.now(),text:val,cat:document.getElementById('ntcat').value,pri:document.getElementById('ntpri').value,col:'todo',created:Date.now()});
+  saveTasks(); renderKanban(); refreshOverview(); inp.value='';
+}
+function ovQuickAdd(){
+  const inp=document.getElementById('ov-quick-inp');
+  const val=inp.value.trim(); if(!val) return;
+  tasks.unshift({id:'t'+Date.now(),text:val,cat:document.getElementById('ov-quick-cat').value,pri:'m',col:'todo',created:Date.now()});
+  saveTasks(); renderKanban(); refreshOverview(); inp.value='';
+}
+function focusAdd(){ document.getElementById('new-task-inp').focus(); }
+function updateNavBadge(){
+  const b=document.getElementById('nav-task-count');
+  if(b) b.textContent=tasks.filter(t=>t.col==='todo').length;
+}
 
-// ── DRAG & DROP KANBAN
-let draggedCard = null, dragSrc = null;
-function dragStart(el, col) { draggedCard = el; dragSrc = col; el.classList.add('dragging'); }
-function dragOver(col) { col.classList.add('drag-over'); }
-function drop(e, colId) {
+// ── Drag & Drop
+let draggedId=null,dragSrc=null;
+function dragStart(el,col){ draggedId=el.dataset.id; dragSrc=col; el.classList.add('dragging'); }
+function dragOver(colEl){ colEl.classList.add('drag-over'); }
+function drop(e,colId){
   e.preventDefault();
-  if (!draggedCard) return;
-  draggedCard.classList.remove('dragging');
   document.querySelectorAll('.k-col').forEach(c=>c.classList.remove('drag-over'));
-  const target = document.getElementById('kcol-'+colId);
-  if (target && dragSrc !== colId) {
-    target.appendChild(draggedCard);
-    if (colId === 'done') draggedCard.classList.add('k-card-done'); else draggedCard.classList.remove('k-card-done');
-    draggedCard.setAttribute('ondragstart',`dragStart(this,'${colId}')`);
-    draggedCard.setAttribute('ondrop',`dropOnCard(event,this,'${colId}')`);
-    updateKCounts();
-  }
-  draggedCard = null;
+  if(!draggedId||dragSrc===colId){ draggedId=null; return; }
+  const t=tasks.find(t=>t.id===draggedId);
+  if(t){ t.col=colId; saveTasks(); renderKanban(); refreshOverview(); }
+  draggedId=null;
 }
-function dropOnCard(e, el, colId) { e.preventDefault(); e.stopPropagation(); drop(e, colId); }
-function updateKCounts() {
-  ['todo','prog','done'].forEach(id => {
-    document.getElementById('kc-'+id).textContent = document.getElementById('kcol-'+id).children.length;
+function dropOnCard(e,el,colId){ e.preventDefault(); e.stopPropagation(); drop(e,colId); }
+
+// ── Overview task list
+function renderOvTasks(){
+  const el=document.getElementById('ov-task-list'); if(!el) return;
+  const pending=tasks.filter(t=>t.col!=='done').slice(0,6);
+  if(!pending.length){
+    el.innerHTML='<div style="padding:16px 0;text-align:center;font-size:12px;color:var(--text3)">All caught up! ✓</div>';
+  } else {
+    el.innerHTML=pending.map(t=>`<div class="task-row"><div class="pri-dot" style="background:${priColor(t.pri)}"></div><div class="chk" onclick="ovToggleTask('${t.id}',this)"></div><div class="task-txt">${t.text}</div>${taskTagHTML(t.cat)}</div>`).join('');
+  }
+  const done=tasks.filter(t=>t.col==='done').length;
+  const m=document.getElementById('ov-task-meta');
+  if(m) m.textContent=`${done} / ${tasks.length} done`;
+  const md=document.getElementById('m-done'); if(md) md.textContent=done;
+  const mp=document.getElementById('m-prog'); if(mp) mp.textContent=tasks.filter(t=>t.col==='prog').length;
+}
+function ovToggleTask(id){
+  const t=tasks.find(t=>t.id===id); if(!t) return;
+  t.col=t.col==='done'?'todo':'done';
+  saveTasks(); renderKanban(); refreshOverview();
+}
+
+// ═══════════════════════════════════════
+// ACADEMICS — topic states
+// ═══════════════════════════════════════
+function getTopicStates(){ return LS.get('topicStates',{}); }
+function saveTopicStates(s){ LS.set('topicStates',s); }
+
+function cycleTopic(el){
+  const b=el.querySelector('.ts'); if(!b) return;
+  const nm=el.querySelector('.topic-nm'); if(!nm) return;
+  const key=nm.textContent.trim();
+  const states=getTopicStates();
+  if(b.classList.contains('ts-todo')){ b.className='ts ts-prog'; b.textContent='In progress'; states[key]='prog'; }
+  else if(b.classList.contains('ts-prog')){ b.className='ts ts-done'; b.textContent='Done'; states[key]='done'; }
+  else{ b.className='ts ts-todo'; b.textContent='To do'; delete states[key]; }
+  saveTopicStates(states);
+  refreshAcadProgress();
+}
+
+function loadTopicStates(){
+  const states=getTopicStates();
+  document.querySelectorAll('#page-academics .topic-row').forEach(row=>{
+    const nm=row.querySelector('.topic-nm'); if(!nm) return;
+    const key=nm.textContent.trim();
+    const b=row.querySelector('.ts'); if(!b) return;
+    const s=states[key];
+    if(s==='done'){ b.className='ts ts-done'; b.textContent='Done'; }
+    else if(s==='prog'){ b.className='ts ts-prog'; b.textContent='In progress'; }
+    else{ b.className='ts ts-todo'; b.textContent='To do'; }
+  });
+  refreshAcadProgress();
+}
+
+function refreshAcadProgress(){
+  const states=getTopicStates();
+  // Update each subject card header pct + prog bar
+  document.querySelectorAll('#page-academics .subj-card').forEach(card=>{
+    const rows=card.querySelectorAll('.topic-row');
+    const total=rows.length; let done=0;
+    rows.forEach(r=>{ const k=r.querySelector('.topic-nm')?.textContent.trim(); if(states[k]==='done') done++; });
+    const pct=total>0?Math.round(done/total*100):0;
+    const pctEl=card.querySelector('.subj-pct'); if(pctEl) pctEl.textContent=pct+'%';
+    const bar=card.querySelector('.subj-prog-bar .pfill'); if(bar) bar.style.width=pct+'%';
+  });
+  // Update overview progress bars by subject name
+  const subjMap=[
+    {ovId:'physics',  color:'var(--accent)', name:'Physics'},
+    {ovId:'maths',    color:'var(--blue)',   name:'Mathematics'},
+    {ovId:'econ',     color:'var(--amber)',  name:'Economics'},
+    {ovId:'accounts', color:'var(--teal)',   name:'Accounts'},
+    {ovId:'english',  color:'var(--pink)',   name:'English'},
+  ];
+  subjMap.forEach(({ovId,color,name})=>{
+    // Find the subject card whose .subj-name matches
+    let total=0,done=0;
+    document.querySelectorAll('#page-academics .subj-card').forEach(card=>{
+      const nm=card.querySelector('.subj-name');
+      if(nm&&nm.textContent.trim()===name){
+        const rows=card.querySelectorAll('.topic-row');
+        total=rows.length;
+        rows.forEach(r=>{ const k=r.querySelector('.topic-nm')?.textContent.trim(); if(states[k]==='done') done++; });
+      }
+    });
+    const pct=total>0?Math.round(done/total*100):0;
+    const bar=document.getElementById('ap-'+ovId); if(bar){ bar.style.width=pct+'%'; bar.style.background=color; }
+    const lbl=document.getElementById('ap-'+ovId+'-lbl'); if(lbl) lbl.textContent=`${done}/${total}`;
+  });
+  // Update topics metric
+  const totalDone=Object.values(states).filter(v=>v==='done').length;
+  const mt=document.getElementById('m-topics'); if(mt) mt.textContent=totalDone;
+}
+
+// ═══════════════════════════════════════
+// SCHEDULE
+// ═══════════════════════════════════════
+let schedule=LS.get('schedule',[
+  {id:'s1',time:'09:00',title:'Physics — Kinematics revision',cat:'Physics'},
+  {id:'s2',time:'11:30',title:'GRYDX API debugging',cat:'Project'},
+  {id:'s3',time:'15:00',title:'Economics — Macroeconomy',cat:'Economics'},
+]);
+function saveSchedule(){ LS.set('schedule',schedule); }
+const SCHED_COLORS={Physics:'var(--accent)',Maths:'var(--blue)',Economics:'var(--amber)',Accounts:'var(--teal)',English:'var(--pink)',Project:'var(--green)',Other:'var(--text3)'};
+const SCHED_TAGS={Physics:'<span class="tag tp">Physics</span>',Maths:'<span class="tag tb">Maths</span>',Economics:'<span class="tag ta">Econ</span>',Accounts:'<span class="tag tt">Acc</span>',English:'<span class="tag tpk">English</span>',Project:'<span class="tag tg">Project</span>',Other:'<span class="tag tp">Other</span>'};
+
+function renderSchedule(){
+  const el=document.getElementById('sched-list'); if(!el) return;
+  if(!schedule.length){ el.innerHTML='<div style="padding:12px 0;text-align:center;font-size:12px;color:var(--text3)">No events yet — click + Add</div>'; return; }
+  el.innerHTML=[...schedule].sort((a,b)=>a.time.localeCompare(b.time)).map(s=>`
+    <div class="sched-item">
+      <div class="sched-time">${s.time}</div>
+      <div class="sched-bar" style="background:${SCHED_COLORS[s.cat]||'var(--accent)'}"></div>
+      <div class="sched-body" style="flex:1"><div class="sched-title">${s.title}</div>${SCHED_TAGS[s.cat]||''}</div>
+      <button onclick="deleteSchedItem('${s.id}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;padding:0 0 0 8px;line-height:1;flex-shrink:0" title="Remove">×</button>
+    </div>`).join('');
+}
+function addSchedItem(){
+  const time=prompt('Time (HH:MM):','09:00'); if(!time||!/^\d{1,2}:\d{2}$/.test(time)) return;
+  const title=prompt('Event title:'); if(!title) return;
+  const catList=['Physics','Maths','Economics','Accounts','English','Project','Other'];
+  const cat=prompt(`Category:\n${catList.join(' / ')}:`,'Physics');
+  const safecat=catList.includes(cat)?cat:'Other';
+  schedule.push({id:'s'+Date.now(),time,title,cat:safecat});
+  saveSchedule(); renderSchedule();
+}
+function deleteSchedItem(id){ schedule=schedule.filter(s=>s.id!==id); saveSchedule(); renderSchedule(); }
+
+// ═══════════════════════════════════════
+// CALENDAR — real date + persisted events
+// ═══════════════════════════════════════
+let calYear,calMonth;
+const MONTHS_FULL=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function buildCal(y,m){
+  const grid=document.getElementById('cal-grid'); if(!grid) return;
+  const title=document.getElementById('cal-title'); if(title) title.textContent=`${MONTHS_FULL[m]} ${y}`;
+  const dayNames=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  let html=dayNames.map(d=>`<div class="cday hdr">${d}</div>`).join('');
+  const first=new Date(y,m,1).getDay();
+  const daysInMonth=new Date(y,m+1,0).getDate();
+  const today=new Date();
+  const isToday=(d)=>today.getFullYear()===y&&today.getMonth()===m&&today.getDate()===d;
+  const events=LS.get('calEvents',{});
+  for(let i=0;i<first;i++) html+=`<div class="cday"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const key=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const cls=['cday','num',isToday(d)?'today':'',events[key]?'has-ev':''].filter(Boolean).join(' ');
+    html+=`<div class="${cls}" onclick="calDayClick('${key}',${d},${m})" title="${events[key]||''}">${d}</div>`;
+  }
+  grid.innerHTML=html;
+}
+function calNav(dir){ calMonth+=dir; if(calMonth>11){calMonth=0;calYear++;} if(calMonth<0){calMonth=11;calYear--;} buildCal(calYear,calMonth); }
+function calDayClick(key,d,m){
+  const events=LS.get('calEvents',{});
+  if(events[key]){
+    if(confirm(`Remove: "${events[key]}"?`)){ delete events[key]; LS.set('calEvents',events); buildCal(calYear,calMonth); }
+    return;
+  }
+  const txt=prompt(`Add event for ${d} ${MONTHS_FULL[m]}:`); if(!txt) return;
+  events[key]=txt; LS.set('calEvents',events); buildCal(calYear,calMonth);
+}
+
+// ═══════════════════════════════════════
+// HABITS — per-day localStorage
+// ═══════════════════════════════════════
+const HABITS=[
+  {id:'dw',name:'Deep work (4h+)',emoji:'🎯'},
+  {id:'rd',name:'Read / research',emoji:'📖'},
+  {id:'ex',name:'Exercise',emoji:'💪'},
+  {id:'rv',name:"Review tomorrow's tasks",emoji:'📋'},
+  {id:'cd',name:'Code / project work',emoji:'💻'},
+];
+function dateKey(offsetDays=0){
+  const d=new Date(); d.setDate(d.getDate()-offsetDays);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function getHabitDone(hid,offset=0){ return LS.get(`h_${hid}_${dateKey(offset)}`,false); }
+function setHabitDone(hid,val){ LS.set(`h_${hid}_${dateKey(0)}`,val); }
+function getStreak(hid){ let s=0; for(let i=0;i<365;i++){ if(getHabitDone(hid,i)) s++; else break; } return s; }
+
+function buildHabitDots(containerId,hid,clickable=true){
+  const el=document.getElementById(containerId); if(!el) return;
+  el.innerHTML='';
+  for(let i=6;i>=0;i--){
+    const done=getHabitDone(hid,i);
+    const d=document.createElement('div');
+    d.className='h-dot'+(done?' done':'');
+    if(i===0&&clickable){
+      d.style.cursor='pointer';
+      d.title='Click to toggle today';
+      d.onclick=()=>{
+        const cur=getHabitDone(hid,0);
+        setHabitDone(hid,!cur);
+        buildHabitDots(containerId,hid,clickable);
+        refreshStreaks();
+        buildOvHabits();
+      };
+    } else { d.style.cursor='default'; }
+    el.appendChild(d);
+  }
+}
+function getMaxStreak(){ return Math.max(0,...HABITS.map(h=>getStreak(h.id))); }
+function refreshStreaks(){
+  HABITS.forEach(h=>{
+    const s=getStreak(h.id);
+    const el=document.getElementById('streak-'+h.id); if(el) el.textContent=s+'🔥';
+    const ov=document.getElementById('ovs-'+h.id); if(ov) ov.textContent=s+'🔥';
+  });
+  const ms=getMaxStreak();
+  const sm=document.getElementById('m-streak'); if(sm) sm.textContent=ms+'d';
+  const sb=document.getElementById('m-streak-badge'); if(sb) sb.textContent=`🔥 ${ms}d streak`;
+  // Update sidebar habits badge
+  document.querySelectorAll('.nav-item').forEach((n,i)=>{
+    if(i===3){ const b=n.querySelector('.nav-badge'); if(b) b.textContent=ms+'🔥'; }
   });
 }
 
-// ── TOPIC CYCLE
-function cycleTopic(el) {
-  const b = el.querySelector('.ts');
-  if (b.classList.contains('ts-todo')) { b.className='ts ts-prog'; b.textContent='In progress'; }
-  else if (b.classList.contains('ts-prog')) { b.className='ts ts-done'; b.textContent='Done'; }
-  else { b.className='ts ts-todo'; b.textContent='To do'; }
+function buildHabitPage(){
+  const el=document.getElementById('habits-full-list'); if(!el) return;
+  el.innerHTML=HABITS.map(h=>`
+    <div class="habit-row">
+      <div class="habit-name">${h.emoji} ${h.name}</div>
+      <div class="habit-streak" id="streak-${h.id}">${getStreak(h.id)}🔥</div>
+      <div class="habit-dots" id="hd-${h.id}"></div>
+    </div>`).join('');
+  HABITS.forEach(h=>buildHabitDots('hd-'+h.id,h.id,true));
+  buildHeatmap();
+}
+function buildOvHabits(){
+  const el=document.getElementById('ov-habits-body'); if(!el) return;
+  el.innerHTML=HABITS.slice(0,3).map(h=>`
+    <div class="habit-row">
+      <div class="habit-name">${h.emoji} ${h.name}</div>
+      <div class="habit-streak" id="ovs-${h.id}">${getStreak(h.id)}🔥</div>
+      <div class="habit-dots" id="ovh-${h.id}"></div>
+    </div>`).join('');
+  HABITS.slice(0,3).forEach(h=>buildHabitDots('ovh-'+h.id,h.id,true));
+}
+function buildHeatmap(){
+  const grid=document.getElementById('heatmap'); if(!grid) return;
+  grid.innerHTML='';
+  for(let i=181;i>=0;i--){
+    const count=HABITS.filter(h=>getHabitDone(h.id,i)).length;
+    const cell=document.createElement('div');
+    const lvl=count===0?'':count===1?' hm-l1':count<=2?' hm-l2':count<=4?' hm-l3':' hm-l4';
+    cell.className='hm-cell'+lvl;
+    const dk=dateKey(i);
+    cell.title=`${dk}: ${count}/${HABITS.length} habits`;
+    grid.appendChild(cell);
+  }
 }
 
-// ── NOTES (localStorage)
-let activeNote = 'physics';
-const noteDefaults = {
-  physics: 'Physics — Kinematics\n\nv = u + at\ns = ut + ½at²\nv² = u² + 2as\n\nKey: displacement-time slope = velocity\nVelocity-time slope = acceleration\n\nNote: projectile motion → treat x and y independently.',
-  maths: 'Mathematics — Quadratics\n\nax² + bx + c = 0\nQuadratic formula: x = (-b ± √(b²-4ac)) / 2a\n\nDiscriminant Δ = b²-4ac\n  Δ > 0 → two distinct real roots\n  Δ = 0 → one repeated root\n  Δ < 0 → no real roots (complex)\n\nCompleting the square: a(x+h)² + k',
-  econ: 'Economics — Macroeconomy\n\nAD = C + I + G + (X - M)\n\nInflation types:\n  Demand-pull → excess AD\n  Cost-push   → supply shock\n\nPhillips curve: inflation ↔ unemployment trade-off\nQuantity theory: MV = PT',
-  accounts: 'Accounts — Financial Statements\n\nIncome Statement: Revenue − COGS = Gross Profit\nGross Profit − Expenses = Net Profit\n\nBalance Sheet: Assets = Liabilities + Equity\n\nKey ratios:\n  Gross margin = GP/Revenue × 100\n  Current ratio = Current Assets / Current Liabilities',
-  grydx: 'GRYDX — Dev Notes\n\nBloomberg API: Check authentication header\nError scanner: regex pattern for formula syntax\nPriority: fix volatility score on multi-stock model\n\nTODO:\n  [ ] Bloomberg API auth fix\n  [ ] Add batch processing for 50+ tickers\n  [ ] Formula generation v2',
-  general: ''
+// ═══════════════════════════════════════
+// NOTES
+// ═══════════════════════════════════════
+let activeNote='physics';
+const noteDefaults={
+  physics:'Physics — Kinematics\n\nv = u + at\ns = ut + ½at²\nv² = u² + 2as\n\nKey: s-t slope = velocity, v-t slope = acceleration\nProjectile: treat x and y independently.',
+  maths:'Mathematics — Quadratics\n\nax² + bx + c = 0\nx = (-b ± √(b²-4ac)) / 2a\n\nDiscriminant Δ = b²-4ac\n  Δ > 0 → two real roots\n  Δ = 0 → one repeated root\n  Δ < 0 → no real roots',
+  econ:'Economics — Macroeconomy\n\nAD = C + I + G + (X − M)\n\nInflation:\n  Demand-pull → excess AD\n  Cost-push   → supply shock\n\nPhillips curve: inflation ↔ unemployment\nMV = PT (quantity theory)',
+  accounts:'Accounts — Statements\n\nIncome Statement: Revenue − COGS = Gross Profit\nBalance Sheet: Assets = Liabilities + Equity\n\nKey ratios:\n  Gross margin = GP/Revenue × 100\n  Current ratio = CA / CL',
+  grydx:'GRYDX — Dev Notes\n\nBloomberg API: check auth header\nError scanner: regex on formula syntax\n\nTODO:\n  [ ] Bloomberg API auth fix\n  [ ] Batch processing 50+ tickers\n  [ ] Formula generation v2',
+  general:''
 };
-function loadNote(tab) {
-  const saved = localStorage.getItem('mddos_note_'+tab);
-  document.getElementById('note-area').value = saved !== null ? saved : (noteDefaults[tab] || '');
+function loadNote(tab){
+  const el=document.getElementById('note-area'); if(!el) return;
+  const saved=localStorage.getItem('mddos_note_'+tab);
+  el.value=saved!==null?saved:(noteDefaults[tab]||'');
   updateNoteMeta();
 }
-function saveNote() {
-  const val = document.getElementById('note-area').value;
-  localStorage.setItem('mddos_note_'+activeNote, val);
-  document.getElementById('note-saved-indicator').textContent = '✓ Saved';
-  setTimeout(()=>document.getElementById('note-saved-indicator').textContent='', 2000);
+function saveNote(){
+  const el=document.getElementById('note-area'); if(!el) return;
+  localStorage.setItem('mddos_note_'+activeNote,el.value);
+  const ind=document.getElementById('note-saved-indicator');
+  if(ind){ ind.textContent='✓ Saved'; setTimeout(()=>ind.textContent='',2000); }
 }
-function clearNote() { document.getElementById('note-area').value=''; updateNoteMeta(); }
-function updateNoteMeta() {
-  const v = document.getElementById('note-area').value;
-  document.getElementById('note-meta').textContent = `${v.length} chars · ${v.split('\n').length} lines`;
+function clearNote(){ const el=document.getElementById('note-area'); if(el){el.value='';updateNoteMeta();} }
+function updateNoteMeta(){
+  const el=document.getElementById('note-area'); if(!el) return;
+  const m=document.getElementById('note-meta');
+  if(m) m.textContent=`${el.value.length} chars · ${el.value.split('\n').length} lines`;
 }
-function switchNote(tab, el) {
-  saveNote();
-  activeNote = tab;
+function switchNote(tab,el){
+  saveNote(); activeNote=tab;
   document.querySelectorAll('.note-tab').forEach(t=>t.classList.remove('active-tab'));
   if(el) el.classList.add('active-tab');
   loadNote(tab);
 }
-document.addEventListener('DOMContentLoaded',()=>{
-  loadNote('physics');
-  document.getElementById('note-area').addEventListener('input', updateNoteMeta);
-});
-// auto-save every 30s
-setInterval(()=>{ if(document.getElementById('note-area')) saveNote(); }, 30000);
+setInterval(()=>{ if(document.getElementById('note-area')) saveNote(); },30000);
 
-// ── POMODORO TIMER
+// ═══════════════════════════════════════
+// POMODORO TIMER
+// ═══════════════════════════════════════
 let timerTotal=25*60,timerLeft=25*60,timerOn=false,timerInt=null,timerMode='focus';
-function updateTimerUI() {
+function updateTimerUI(){
   const m=Math.floor(timerLeft/60),s=timerLeft%60;
-  document.getElementById('timer-disp').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  const d=document.getElementById('timer-disp'); if(d) d.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
   const pct=timerLeft/timerTotal;
-  document.getElementById('timer-pbar').style.width=Math.round(pct*100)+'%';
+  const pb=document.getElementById('timer-pbar'); if(pb) pb.style.width=Math.round(pct*100)+'%';
   const circ=377;
-  document.getElementById('ring-circle').setAttribute('stroke-dashoffset',Math.round(circ*(1-pct)));
+  const rc=document.getElementById('ring-circle'); if(rc) rc.setAttribute('stroke-dashoffset',Math.round(circ*(1-pct)));
+  document.title=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} — MD OS`;
 }
-function setTimerMode(mode,mins,btn) {
+function setTimerMode(mode,mins,btn){
   document.querySelectorAll('.t-mode-btn').forEach(b=>b.classList.remove('on'));
   if(btn) btn.classList.add('on');
   timerMode=mode; timerTotal=mins*60; timerLeft=mins*60;
   clearInterval(timerInt); timerOn=false;
-  document.getElementById('t-start-btn').textContent='▶ Start';
-  document.getElementById('timer-mode-lbl').textContent=mode==='focus'?'Focus':mode==='deep'?'Deep work':'Break';
-  document.getElementById('ring-circle').setAttribute('stroke','var('+(mode==='focus'?'--accent':mode==='deep'?'--blue':'--green')+')');
+  const sb=document.getElementById('t-start-btn'); if(sb) sb.textContent='▶ Start';
+  const ml=document.getElementById('timer-mode-lbl'); if(ml) ml.textContent=mode==='focus'?'Focus':mode==='deep'?'Deep work':'Break';
+  const rc=document.getElementById('ring-circle');
+  if(rc) rc.setAttribute('stroke',mode==='focus'?'var(--accent)':mode==='deep'?'var(--blue)':'var(--green)');
   updateTimerUI();
 }
-function toggleTimer() {
-  if(timerOn) {
+function toggleTimer(){
+  if(timerOn){
     clearInterval(timerInt); timerOn=false;
-    document.getElementById('t-start-btn').textContent='▶ Resume';
+    const sb=document.getElementById('t-start-btn'); if(sb) sb.textContent='▶ Resume';
   } else {
-    timerOn=true; document.getElementById('t-start-btn').textContent='⏸ Pause';
+    timerOn=true;
+    const sb=document.getElementById('t-start-btn'); if(sb) sb.textContent='⏸ Pause';
     timerInt=setInterval(()=>{
       if(timerLeft<=0){
         clearInterval(timerInt); timerOn=false;
-        document.getElementById('t-start-btn').textContent='▶ Start';
-        logSession();
-        return;
+        const sb=document.getElementById('t-start-btn'); if(sb) sb.textContent='▶ Start';
+        document.title='MD OS'; logSession(); return;
       }
       timerLeft--; updateTimerUI();
     },1000);
   }
 }
-function resetTimer() { clearInterval(timerInt); timerOn=false; timerLeft=timerTotal; document.getElementById('t-start-btn').textContent='▶ Start'; updateTimerUI(); }
-function logSession() {
-  const log = document.getElementById('sessions-log');
-  const mins = Math.round(timerTotal/60);
-  const colors = {focus:'var(--accent)',deep:'var(--blue)',short:'var(--green)',long:'var(--teal)'};
-  const now = new Date(); const h=String(now.getHours()).padStart(2,'0'); const m=String(now.getMinutes()).padStart(2,'0');
-  const item = document.createElement('div');
-  item.className='session-item';
-  item.innerHTML=`<div class="session-dot" style="background:${colors[timerMode]||'var(--accent)'}"></div><div class="session-desc">${timerMode==='focus'?'Focus session':timerMode==='deep'?'Deep work':'Break'}</div><div class="session-time">${h}:${m} · ${mins}m</div>`;
+function resetTimer(){
+  clearInterval(timerInt); timerOn=false; timerLeft=timerTotal;
+  const sb=document.getElementById('t-start-btn'); if(sb) sb.textContent='▶ Start';
+  document.title='MD OS'; updateTimerUI();
+}
+function logSession(){
+  const log=document.getElementById('sessions-log'); if(!log) return;
+  const mins=Math.round(timerTotal/60);
+  const cols={focus:'var(--accent)',deep:'var(--blue)',short:'var(--green)',long:'var(--teal)'};
+  const n=new Date(); const h=String(n.getHours()).padStart(2,'0'); const m=String(n.getMinutes()).padStart(2,'0');
+  const item=document.createElement('div'); item.className='session-item';
+  item.innerHTML=`<div class="session-dot" style="background:${cols[timerMode]||'var(--accent)'}"></div><div class="session-desc">${timerMode==='focus'?'Focus':timerMode==='deep'?'Deep work':'Break'}</div><div class="session-time">${h}:${m} · ${mins}m</div>`;
   log.prepend(item);
+  const sessions=LS.get('sessions',[]); sessions.unshift({mode:timerMode,mins,time:`${h}:${m}`,date:dateKey(0)});
+  LS.set('sessions',sessions.slice(0,50));
 }
 
-// ── HABITS
-function buildHabitDots(containerId, doneCount) {
-  const el = document.getElementById(containerId);
-  if(!el) return;
-  el.innerHTML='';
-  for(let i=0;i<7;i++){
-    const d=document.createElement('div');
-    d.className='h-dot'+(i<doneCount?' done':'');
-    d.onclick=function(){this.classList.toggle('done')};
-    el.appendChild(d);
-  }
-}
-['hw-dots','rr-dots','ex-dots'].forEach((id,i)=>buildHabitDots(id,[7,5,3][i]));
-['hd-dw','hd-rd','hd-ex','hd-rv','hd-cd'].forEach((id,i)=>buildHabitDots(id,[7,5,3,6,7][i]));
-function buildHeatmap() {
-  const grid=document.getElementById('heatmap'); if(!grid) return;
-  grid.innerHTML='';
-  for(let i=0;i<182;i++){
-    const cell=document.createElement('div');
-    const r=Math.random();
-    cell.className='hm-cell'+(r>0.7?' hm-l4':r>0.5?' hm-l3':r>0.3?' hm-l2':r>0.15?' hm-l1':'');
-    cell.title=`${Math.floor(Math.random()*6)} habits`;
-    grid.appendChild(cell);
-  }
-}
-buildHeatmap();
-
-// ── COMMAND PALETTE
-function openCmd() { document.getElementById('cmd-overlay').classList.add('open'); setTimeout(()=>document.getElementById('cmd-inp').focus(),50); }
-function closeCmd() { document.getElementById('cmd-overlay').classList.remove('open'); document.getElementById('cmd-inp').value=''; }
-function cmdNav(id) { closeCmd(); const items=document.querySelectorAll('.nav-item'); const map={overview:0,tasks:1,focus:2,habits:3,academics:4,projects:5,analytics:6}; nav(id,items[map[id]||0]); }
-function filterCmd(v) {
-  document.querySelectorAll('.cmd-item').forEach(item=>{
-    item.style.display = !v || item.querySelector('.cmd-item-name').textContent.toLowerCase().includes(v.toLowerCase()) ? '' : 'none';
-  });
-}
-function cmdKey(e) { if(e.key==='Escape') closeCmd(); }
+// ═══════════════════════════════════════
+// COMMAND PALETTE
+// ═══════════════════════════════════════
+function openCmd(){ document.getElementById('cmd-overlay').classList.add('open'); setTimeout(()=>document.getElementById('cmd-inp').focus(),50); }
+function closeCmd(){ document.getElementById('cmd-overlay').classList.remove('open'); document.getElementById('cmd-inp').value=''; }
+function cmdNav(id){ closeCmd(); nav(id,null); }
+function filterCmd(v){ document.querySelectorAll('.cmd-item').forEach(item=>{ item.style.display=!v||item.querySelector('.cmd-item-name').textContent.toLowerCase().includes(v.toLowerCase())?'':'none'; }); }
+function cmdKey(e){ if(e.key==='Escape') closeCmd(); }
 document.addEventListener('keydown',e=>{ if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openCmd();} });
 
 // ── NOTIFICATIONS
-function toggleNotif() { document.getElementById('notif-panel').classList.toggle('open'); }
-function clearNotifs() { document.getElementById('notif-list').innerHTML='<div class="notif-empty">No notifications</div>'; }
+function toggleNotif(){ document.getElementById('notif-panel').classList.toggle('open'); }
+function clearNotifs(){ document.getElementById('notif-list').innerHTML='<div class="notif-empty">No notifications</div>'; }
 document.addEventListener('click',e=>{ if(!e.target.closest('#notif-panel')&&!e.target.closest('.icn-btn')) document.getElementById('notif-panel').classList.remove('open'); });
 
-// ── CHARTS
-function drawCharts(){
-  if(window._chartsDrawn) return; window._chartsDrawn=true;
-  const defs={responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#55546A',font:{size:10,family:'DM Mono'}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#55546A',font:{size:10,family:'DM Mono'}}}}};
-  const days=['Apr 22','Apr 23','Apr 24','Apr 25','Apr 26','Apr 27','Apr 28','Apr 29','Apr 30','May 1','May 2','May 3','May 4','May 5'];
-  new Chart(document.getElementById('focus-chart'),{type:'bar',data:{labels:days,datasets:[{data:[2.5,3,1.5,4,2,0,3.5,4.2,2.8,3.1,1.9,4.5,3.8,2.5],backgroundColor:'rgba(123,110,223,0.4)',borderColor:'rgba(123,110,223,0.8)',borderWidth:1,borderRadius:4}]},options:{...defs,plugins:{...defs.plugins}}});
-  new Chart(document.getElementById('tasks-chart'),{type:'doughnut',data:{labels:['Physics','Maths','Economics','Accounts','Projects'],datasets:[{data:[14,22,11,8,18],backgroundColor:['rgba(123,110,223,0.7)','rgba(96,165,250,0.7)','rgba(242,162,51,0.7)','rgba(34,211,200,0.7)','rgba(62,207,142,0.7)'],borderWidth:0}]},options:{responsive:true,plugins:{legend:{display:true,position:'right',labels:{color:'#9896A8',font:{size:10,family:'DM Mono'},boxWidth:10}}}}});
-  const wks=['W1','W2','W3','W4','W5'];
-  new Chart(document.getElementById('prod-chart'),{type:'line',data:{labels:wks,datasets:[{data:[62,74,55,88,79],borderColor:'var(--accent)',backgroundColor:'rgba(123,110,223,0.1)',borderWidth:2,fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'var(--accent)'}]},options:{...defs}});
-  new Chart(document.getElementById('pie-chart'),{type:'polarArea',data:{labels:['Physics','Maths','Econ','Accounts','Projects'],datasets:[{data:[18,24,12,8,20],backgroundColor:['rgba(123,110,223,0.55)','rgba(96,165,250,0.55)','rgba(242,162,51,0.55)','rgba(34,211,200,0.55)','rgba(62,207,142,0.55)'],borderWidth:0}]},options:{responsive:true,plugins:{legend:{display:true,position:'bottom',labels:{color:'#9896A8',font:{size:10},boxWidth:10}}}}});
-}
-function drawHabitChart(){
-  if(window._habitChartDrawn) return; window._habitChartDrawn=true;
-  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  new Chart(document.getElementById('habit-chart'),{type:'bar',data:{labels:days,datasets:[
-    {label:'Completed',data:[5,6,4,6,5,3,6],backgroundColor:'rgba(123,110,223,0.5)',borderColor:'rgba(123,110,223,0.9)',borderWidth:1,borderRadius:3},
-    {label:'Target',data:[6,6,6,6,6,6,6],backgroundColor:'rgba(255,255,255,0.05)',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,borderRadius:3},
-  ]},options:{responsive:true,plugins:{legend:{display:true,labels:{color:'#9896A8',font:{size:10},boxWidth:10}}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#55546A',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#55546A',font:{size:10}},max:6}}}});
+// ═══════════════════════════════════════
+// OVERVIEW REFRESH — ties everything together
+// ═══════════════════════════════════════
+function refreshOverview(){
+  renderOvTasks();
+  renderSchedule();
+  buildOvHabits();
+  refreshStreaks();
+  refreshAcadProgress();
 }
 
-// Init note after DOM ready
-window.addEventListener('load', () => { loadNote('physics'); });
+// ═══════════════════════════════════════
+// CHARTS
+// ═══════════════════════════════════════
+let chartsDrawn=false, habitChartDrawn=false;
+function drawCharts(){
+  if(chartsDrawn) return; chartsDrawn=true;
+  const defs={responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#58567A',font:{size:10,family:'DM Mono'}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#58567A',font:{size:10,family:'DM Mono'}}}}};
+  const days=['Apr 22','Apr 23','Apr 24','Apr 25','Apr 26','Apr 27','Apr 28','Apr 29','Apr 30','May 1','May 2','May 3','May 4','May 5'];
+  new Chart(document.getElementById('focus-chart'),{type:'bar',data:{labels:days,datasets:[{data:[2.5,3,1.5,4,2,0,3.5,4.2,2.8,3.1,1.9,4.5,3.8,2.5],backgroundColor:'rgba(124,110,224,0.45)',borderColor:'rgba(124,110,224,0.9)',borderWidth:1,borderRadius:5}]},options:{...defs}});
+  new Chart(document.getElementById('tasks-chart'),{type:'doughnut',data:{labels:['Physics','Maths','Economics','Accounts','English'],datasets:[{data:[14,22,11,8,6],backgroundColor:['rgba(124,110,224,0.75)','rgba(91,164,245,0.75)','rgba(245,166,35,0.75)','rgba(24,216,204,0.75)','rgba(244,114,182,0.75)'],borderWidth:0}]},options:{responsive:true,plugins:{legend:{display:true,position:'right',labels:{color:'#9A98B0',font:{size:10,family:'DM Mono'},boxWidth:10}}}}});
+  new Chart(document.getElementById('prod-chart'),{type:'line',data:{labels:['W1','W2','W3','W4','W5'],datasets:[{data:[62,74,55,88,79],borderColor:'var(--accent)',backgroundColor:'rgba(124,110,224,0.12)',borderWidth:2,fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'var(--accent)'}]},options:{...defs}});
+  new Chart(document.getElementById('pie-chart'),{type:'polarArea',data:{labels:['Physics','Maths','Econ','Accounts','English'],datasets:[{data:[18,24,12,8,6],backgroundColor:['rgba(124,110,224,0.55)','rgba(91,164,245,0.55)','rgba(245,166,35,0.55)','rgba(24,216,204,0.55)','rgba(244,114,182,0.55)'],borderWidth:0}]},options:{responsive:true,plugins:{legend:{display:true,position:'bottom',labels:{color:'#9A98B0',font:{size:10},boxWidth:10}}}}});
+}
+function drawHabitChart(){
+  if(habitChartDrawn) return; habitChartDrawn=true;
+  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  new Chart(document.getElementById('habit-chart'),{type:'bar',data:{labels:days,datasets:[
+    {label:'Completed',data:[5,4,4,5,3,2,4],backgroundColor:'rgba(124,110,224,0.5)',borderColor:'rgba(124,110,224,0.9)',borderWidth:1,borderRadius:4},
+    {label:'Target',data:[5,5,5,5,5,5,5],backgroundColor:'rgba(255,255,255,0.04)',borderColor:'rgba(255,255,255,0.08)',borderWidth:1,borderRadius:4},
+  ]},options:{responsive:true,plugins:{legend:{display:true,labels:{color:'#9A98B0',font:{size:10},boxWidth:10}}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#58567A',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#58567A',font:{size:10}},max:5}}}});
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+window.addEventListener('load',()=>{
+  // Calendar
+  const now=new Date(); calYear=now.getFullYear(); calMonth=now.getMonth();
+  buildCal(calYear,calMonth);
+
+  // Tasks → kanban (JS-only, no static HTML)
+  renderKanban();
+
+  // Academics topic states from localStorage
+  loadTopicStates();
+
+  // Notes
+  loadNote('physics');
+  const na=document.getElementById('note-area');
+  if(na) na.addEventListener('input',updateNoteMeta);
+
+  // Overview (habits, schedule, metrics, tasks)
+  refreshOverview();
+
+  // Restore last page
+  const last=LS.get('lastPage','overview');
+  nav(last, null);
+});
 </script>
 </body>
 </html>
